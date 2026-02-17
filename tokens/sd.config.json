@@ -1,0 +1,27 @@
+{
+  "source": ["tokens/tokens.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "src/styles/tokens/",
+      "prefix": "ds",
+      "files": [
+        {
+          "destination": "_variables.scss",
+          "format": "scss/variables"
+        }
+      ]
+    },
+    "css": {
+      "transformGroup": "css",
+      "buildPath": "src/styles/tokens/",
+      "prefix": "ds",
+      "files": [
+        {
+          "destination": "_variables.css",
+          "format": "css/variables"
+        }
+      ]
+    }
+  }
+}

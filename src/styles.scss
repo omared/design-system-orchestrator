@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'tokens/variables' as tokens;
+
+:root {
+  // Colores
+  --ds-color-primary:   #{tokens.$ds-global-color-brand-primary};
+  --ds-color-secondary: #{tokens.$ds-global-color-brand-secondary};
+  --ds-color-accent:    #{tokens.$ds-global-color-brand-accent};
+  --ds-color-neutral-100: #{tokens.$ds-global-color-neutral-100};
+  --ds-color-neutral-200: #{tokens.$ds-global-color-neutral-200};
+  --ds-color-neutral-900: #{tokens.$ds-global-color-neutral-900};
+
+  // Espaciado
+  --ds-spacing-xs: #{tokens.$ds-global-spacing-xs};
+  --ds-spacing-sm: #{tokens.$ds-global-spacing-sm};
+  --ds-spacing-md: #{tokens.$ds-global-spacing-md};
+  --ds-spacing-lg: #{tokens.$ds-global-spacing-lg};
+  --ds-spacing-xl: #{tokens.$ds-global-spacing-xl};
+
+  // Tipografía
+  --ds-font-xs: #{tokens.$ds-global-typography-size-xs};
+  --ds-font-sm: #{tokens.$ds-global-typography-size-sm};
+  --ds-font-md: #{tokens.$ds-global-typography-size-md};
+  --ds-font-lg: #{tokens.$ds-global-typography-size-lg};
+  --ds-font-xl: #{tokens.$ds-global-typography-size-xl};
+
+  --ds-font-regular: #{tokens.$ds-global-typography-weight-regular};
+  --ds-font-medium: #{tokens.$ds-global-typography-weight-medium};
+  --ds-font-bold: #{tokens.$ds-global-typography-weight-bold};
+
+  // Border radius
+  --ds-radius-sm: #{tokens.$ds-global-border-radius-sm};
+  --ds-radius-md: #{tokens.$ds-global-border-radius-md};
+  --ds-radius-lg: #{tokens.$ds-global-border-radius-lg};
+  --ds-radius-full: #{tokens.$ds-global-border-radius-full};
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--ds-color-neutral-900);
+  background: var(--ds-color-neutral-100);
+}

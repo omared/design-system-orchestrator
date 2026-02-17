@@ -1,0 +1,35 @@
+@use 'tokens/variables' as tokens;
+
+.ds-btn {
+  padding: tokens.$ds-global-spacing-sm tokens.$ds-global-spacing-md;
+  font-size: tokens.$ds-global-typography-size-md;
+  font-weight: tokens.$ds-global-typography-weight-medium;
+  border: none;
+  border-radius: tokens.$ds-global-border-radius-md;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &--primary {
+    background: tokens.$ds-global-color-brand-primary;
+    color: tokens.$ds-global-color-neutral-100;
+  }
+
+  &--secondary {
+    background: tokens.$ds-global-color-brand-secondary;
+    color: tokens.$ds-global-color-neutral-100;
+  }
+
+  &--accent {
+    background: tokens.$ds-global-color-brand-accent;
+    color: tokens.$ds-global-color-neutral-100;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}

@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "storybook": "ng run design-system-orchestrator:storybook",
-    "build-storybook": "ng run design-system-orchestrator:build-storybook"
+    "build-storybook": "ng run design-system-orchestrator:build-storybook",
+    "tokens:build": "style-dictionary build --config tokens/sd.config.json"
   },
   "prettier": {
     "printWidth": 100,
