@@ -1,35 +1,59 @@
 @use 'tokens/variables' as tokens;
 
 .ds-btn {
-  padding: tokens.$ds-global-spacing-sm tokens.$ds-global-spacing-md;
-  font-size: tokens.$ds-global-typography-size-md;
-  font-weight: tokens.$ds-global-typography-weight-medium;
+  // Usando los tokens reales de tu design system
+  padding: tokens.$ds-layout-spacing-xs tokens.$ds-layout-spacing-md;
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
   border: none;
-  border-radius: tokens.$ds-global-border-radius-md;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease;
+  font-family: tokens.$ds-font-inter;
 
   &--primary {
-    background: tokens.$ds-global-color-brand-primary;
-    color: tokens.$ds-global-color-neutral-100;
+    background: tokens.$ds-button-state-default-color-bg-default;
+    color: tokens.$ds-button-state-default-color-label-default;
+
+    &:hover:not(:disabled) {
+      background: tokens.$ds-button-state-hover-color-bg-hover;
+      color: tokens.$ds-button-state-hover-color-label-hover;
+    }
+
+    &:disabled {
+      background: tokens.$ds-button-state-disabled-color-bg-disabled;
+      color: tokens.$ds-button-state-disabled-color-label-disabled;
+      cursor: not-allowed;
+    }
   }
 
   &--secondary {
-    background: tokens.$ds-global-color-brand-secondary;
-    color: tokens.$ds-global-color-neutral-100;
+    background: tokens.$ds-color-neutral-neutral-200;
+    color: tokens.$ds-text-default-text-color-primary-default;
+
+    &:hover:not(:disabled) {
+      background: tokens.$ds-color-neutral-neutral-300;
+    }
+
+    &:disabled {
+      background: tokens.$ds-color-neutral-neutral-100;
+      color: tokens.$ds-text-disabled-text-color-primary-disabled;
+      cursor: not-allowed;
+    }
   }
 
   &--accent {
-    background: tokens.$ds-global-color-brand-accent;
-    color: tokens.$ds-global-color-neutral-100;
-  }
+    background: tokens.$ds-color-purple-purple-500;
+    color: tokens.$ds-color-base-white;
 
-  &:hover:not(:disabled) {
-    opacity: 0.85;
-  }
+    &:hover:not(:disabled) {
+      background: tokens.$ds-color-purple-purple-600;
+    }
 
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+    &:disabled {
+      background: tokens.$ds-color-purple-purple-200;
+      color: tokens.$ds-text-disabled-text-color-accent-disabled;
+      cursor: not-allowed;
+    }
   }
 }

@@ -5,6 +5,12 @@
       "transformGroup": "scss",
       "buildPath": "src/styles/tokens/",
       "prefix": "ds",
+      "transforms": [
+        "attribute/cti",
+        "name/kebab",
+        "size/rem",
+        "color/css"
+      ],
       "files": [
         {
           "destination": "_variables.scss",

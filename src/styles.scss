@@ -1,37 +1,42 @@
 @use 'tokens/variables' as tokens;
 
 :root {
-  // Colores
-  --ds-color-primary:   #{tokens.$ds-global-color-brand-primary};
-  --ds-color-secondary: #{tokens.$ds-global-color-brand-secondary};
-  --ds-color-accent:    #{tokens.$ds-global-color-brand-accent};
-  --ds-color-neutral-100: #{tokens.$ds-global-color-neutral-100};
-  --ds-color-neutral-200: #{tokens.$ds-global-color-neutral-200};
-  --ds-color-neutral-900: #{tokens.$ds-global-color-neutral-900};
+  // Colores base
+  --ds-color-white: #{tokens.$ds-color-base-white};
+  --ds-color-black: #{tokens.$ds-color-base-black};
+  
+  // Colores de texto
+  --ds-text-primary: #{tokens.$ds-text-default-text-color-primary-default};
+  --ds-text-secondary: #{tokens.$ds-text-default-text-color-secundary-default};
+  --ds-text-accent: #{tokens.$ds-text-default-text-color-accent-default};
+  --ds-text-success: #{tokens.$ds-text-default-text-color-success-default};
+  --ds-text-warning: #{tokens.$ds-text-default-text-color-warning-default};
+  --ds-text-error: #{tokens.$ds-text-default-text-color-error-default};
 
-  // Espaciado
-  --ds-spacing-xs: #{tokens.$ds-global-spacing-xs};
-  --ds-spacing-sm: #{tokens.$ds-global-spacing-sm};
-  --ds-spacing-md: #{tokens.$ds-global-spacing-md};
-  --ds-spacing-lg: #{tokens.$ds-global-spacing-lg};
-  --ds-spacing-xl: #{tokens.$ds-global-spacing-xl};
+  // Backgrounds
+  --ds-bg-primary: #{tokens.$ds-background-background-color-primary-default};
+  --ds-bg-secondary: #{tokens.$ds-background-background-color-secundary-default};
+  --ds-bg-accent: #{tokens.$ds-background-background-color-accent-default};
 
-  // Tipografía
-  --ds-font-xs: #{tokens.$ds-global-typography-size-xs};
-  --ds-font-sm: #{tokens.$ds-global-typography-size-sm};
-  --ds-font-md: #{tokens.$ds-global-typography-size-md};
-  --ds-font-lg: #{tokens.$ds-global-typography-size-lg};
-  --ds-font-xl: #{tokens.$ds-global-typography-size-xl};
-
-  --ds-font-regular: #{tokens.$ds-global-typography-weight-regular};
-  --ds-font-medium: #{tokens.$ds-global-typography-weight-medium};
-  --ds-font-bold: #{tokens.$ds-global-typography-weight-bold};
+  // Spacing (ya tienen px en el valor)
+  --ds-spacing-xxs: #{tokens.$ds-layout-spacing-xxs};
+  --ds-spacing-xs: #{tokens.$ds-layout-spacing-xs};
+  --ds-spacing-sm: #{tokens.$ds-layout-spacing-sm};
+  --ds-spacing-md: #{tokens.$ds-layout-spacing-md};
+  --ds-spacing-lg: #{tokens.$ds-layout-spacing-lg};
+  --ds-spacing-xl: #{tokens.$ds-layout-spacing-xl};
 
   // Border radius
-  --ds-radius-sm: #{tokens.$ds-global-border-radius-sm};
-  --ds-radius-md: #{tokens.$ds-global-border-radius-md};
-  --ds-radius-lg: #{tokens.$ds-global-border-radius-lg};
-  --ds-radius-full: #{tokens.$ds-global-border-radius-full};
+  --ds-radius-xxs: #{tokens.$ds-corner-corner-radius-xxs};
+  --ds-radius-xs: #{tokens.$ds-corner-corner-radius-xs};
+  --ds-radius-sm: #{tokens.$ds-corner-corner-radius-sm};
+  --ds-radius-md: #{tokens.$ds-corner-corner-radius-md};
+
+  // Font sizes
+  --ds-font-xs: #{tokens.$ds-font-size-font-size-100};
+  --ds-font-sm: #{tokens.$ds-font-size-font-size-200};
+  --ds-font-md: #{tokens.$ds-font-size-font-size-300};
+  --ds-font-lg: #{tokens.$ds-font-size-font-size-400};
 }
 
 * {
@@ -41,7 +46,9 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
-  color: var(--ds-color-neutral-900);
-  background: var(--ds-color-neutral-100);
+  font-family: tokens.$ds-font-inter, system-ui, -apple-system, sans-serif;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  background: tokens.$ds-background-background-color-primary-default;
+  font-size: tokens.$ds-font-size-font-size-300;
+  line-height: tokens.$ds-line-height-line-height-300;
 }
