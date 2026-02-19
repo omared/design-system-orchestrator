@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/styles/tokens/**'  # Se dispara cuando los tokens se regeneran
+      - 'src/styles/tokens/**'  # Se dispara cuando los tokens se Regeneran
   workflow_dispatch:  # También permite ejecución manual
 
 permissions:
