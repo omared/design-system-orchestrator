@@ -2,6 +2,151 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "AccordionItem",
+            "id": "interface-AccordionItem-10ae4d4bb5321f669e875b6b62fdbeb50f6e75a4a078f734557aad91aedeefcc09734df2d3d15cd3c76760997a3b270d2770a58f1734ad72bbf2d7fd50a63d2c",
+            "file": "src/app/components/accordion/accordion.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport interface AccordionItem {\r\n  id: string;\r\n  title: string;\r\n  content: string;\r\n  isOpen?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-accordion',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './accordion.html',\r\n  styleUrl: './accordion.scss',\r\n})\r\nexport class AccordionComponent {\r\n  @Input() items: AccordionItem[] = [];\r\n  @Input() allowMultiple: boolean = false;\r\n\r\n  toggle(item: AccordionItem) {\r\n    if (!this.allowMultiple) {\r\n      // Cerrar todos los demás\r\n      this.items.forEach(i => {\r\n        if (i.id !== item.id) {\r\n          i.isOpen = false;\r\n        }\r\n      });\r\n    }\r\n    item.isOpen = !item.isOpen;\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "content",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "isOpen",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DropdownOption",
+            "id": "interface-DropdownOption-3284b99524d04c8e90f9d436756d8a907b0a3e2a1edf9dc7d7dc7043787bce0a01d7b883712af43a19dc4b9175af963339cd97cfb451769bd99c05859ed72ca4",
+            "file": "src/app/components/dropdown/dropdown.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport interface DropdownOption {\r\n  value: string;\r\n  label: string;\r\n  disabled?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-dropdown',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './dropdown.html',\r\n  styleUrl: './dropdown.scss',\r\n})\r\nexport class DropdownComponent {\r\n  @Input() label: string = '';\r\n  @Input() placeholder: string = 'Select an option';\r\n  @Input() options: DropdownOption[] = [];\r\n  @Input() value: string = '';\r\n  @Input() disabled: boolean = false;\r\n  @Output() valueChange = new EventEmitter<string>();\r\n\r\n  isOpen: boolean = false;\r\n  selectedLabel: string = '';\r\n\r\n  constructor(private elementRef: ElementRef) {}\r\n\r\n  ngOnInit() {\r\n    this.updateSelectedLabel();\r\n  }\r\n\r\n  ngOnChanges() {\r\n    this.updateSelectedLabel();\r\n  }\r\n\r\n  toggleDropdown() {\r\n    if (!this.disabled) {\r\n      this.isOpen = !this.isOpen;\r\n    }\r\n  }\r\n\r\n  selectOption(option: DropdownOption) {\r\n    if (!option.disabled) {\r\n      this.value = option.value;\r\n      this.selectedLabel = option.label;\r\n      this.valueChange.emit(this.value);\r\n      this.isOpen = false;\r\n    }\r\n  }\r\n\r\n  updateSelectedLabel() {\r\n    const selected = this.options.find(opt => opt.value === this.value);\r\n    this.selectedLabel = selected ? selected.label : '';\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onClickOutside(event: Event) {\r\n    if (!this.elementRef.nativeElement.contains(event.target)) {\r\n      this.isOpen = false;\r\n    }\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "Tab",
+            "id": "interface-Tab-c2f5dbe062f7133030ae309dbd5b4359f9614fad9998806b0d234295bcd41e3e96a041de72b4c99ea1eadc621684a6d6cef1315b061681e6c99af2ea3a9626bf",
+            "file": "src/app/components/tabs/tabs.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport interface Tab {\r\n  id: string;\r\n  label: string;\r\n  disabled?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-tabs',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './tabs.html',\r\n  styleUrl: './tabs.scss',\r\n})\r\nexport class TabsComponent {\r\n  @Input() tabs: Tab[] = [];\r\n  @Input() activeTab: string = '';\r\n  @Input() variant: 'line' | 'pill' = 'line';\r\n  @Output() tabChange = new EventEmitter<string>();\r\n\r\n  ngOnInit() {\r\n    if (!this.activeTab && this.tabs.length > 0) {\r\n      this.activeTab = this.tabs[0].id;\r\n    }\r\n  }\r\n\r\n  selectTab(tab: Tab) {\r\n    if (!tab.disabled) {\r\n      this.activeTab = tab.id;\r\n      this.tabChange.emit(tab.id);\r\n    }\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -34,8 +179,194 @@
     "directives": [],
     "components": [
         {
+            "name": "AccordionComponent",
+            "id": "component-AccordionComponent-10ae4d4bb5321f669e875b6b62fdbeb50f6e75a4a078f734557aad91aedeefcc09734df2d3d15cd3c76760997a3b270d2770a58f1734ad72bbf2d7fd50a63d2c",
+            "file": "src/app/components/accordion/accordion.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-accordion",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./accordion.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "allowMultiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "AccordionItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "toggle",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "AccordionItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "AccordionItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport interface AccordionItem {\r\n  id: string;\r\n  title: string;\r\n  content: string;\r\n  isOpen?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-accordion',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './accordion.html',\r\n  styleUrl: './accordion.scss',\r\n})\r\nexport class AccordionComponent {\r\n  @Input() items: AccordionItem[] = [];\r\n  @Input() allowMultiple: boolean = false;\r\n\r\n  toggle(item: AccordionItem) {\r\n    if (!this.allowMultiple) {\r\n      // Cerrar todos los demás\r\n      this.items.forEach(i => {\r\n        if (i.id !== item.id) {\r\n          i.isOpen = false;\r\n        }\r\n      });\r\n    }\r\n    item.isOpen = !item.isOpen;\r\n  }\r\n}\r\n",
+            "styleUrl": "./accordion.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"ds-accordion\">\r\n  <div *ngFor=\"let item of items\" class=\"ds-accordion-item\" [class.open]=\"item.isOpen\">\r\n    <button type=\"button\" class=\"ds-accordion-header\" (click)=\"toggle(item)\" [attr.aria-expanded]=\"item.isOpen\">\r\n      <span class=\"ds-accordion-title\">{{ item.title }}</span>\r\n      <svg class=\"ds-accordion-icon\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\r\n        <path fill-rule=\"evenodd\"\r\n          d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"\r\n          clip-rule=\"evenodd\" />\r\n      </svg>\r\n    </button>\r\n\r\n    <div class=\"ds-accordion-content\" [class.open]=\"item.isOpen\">\r\n      <div class=\"ds-accordion-body\">\r\n        {{ item.content }}\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+        },
+        {
+            "name": "AlertComponent",
+            "id": "component-AlertComponent-7e3d3c8a922f12bfeb2daab7ef4e632f8d9dd132cda0aed6d5fb0e63aa344cdef52a0b9f25ac4fd4eb3afa1f70ba28d9406baa9429501f1d03fd33c37aaa89c9",
+            "file": "src/app/components/alert/alert.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-alert",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./alert.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "dismissible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "dismiss",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onDismiss",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-alert',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './alert.html',\r\n  styleUrl: './alert.scss',\r\n})\r\nexport class AlertComponent {\r\n  @Input() variant: 'info' | 'success' | 'warning' | 'error' = 'info';\r\n  @Input() title: string = '';\r\n  @Input() dismissible: boolean = false;\r\n  @Output() dismiss = new EventEmitter<void>();\r\n\r\n  onDismiss() {\r\n    this.dismiss.emit();\r\n  }\r\n}\r\n",
+            "styleUrl": "./alert.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div [class]=\"'ds-alert ds-alert--' + variant\">\r\n  <div class=\"ds-alert-icon\">\r\n    <svg *ngIf=\"variant === 'info'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z\" />\r\n    </svg>\r\n    <svg *ngIf=\"variant === 'success'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path\r\n        d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\" />\r\n    </svg>\r\n    <svg *ngIf=\"variant === 'warning'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z\" />\r\n    </svg>\r\n    <svg *ngIf=\"variant === 'error'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z\" />\r\n    </svg>\r\n  </div>\r\n\r\n  <div class=\"ds-alert-content\">\r\n    <h4 *ngIf=\"title\" class=\"ds-alert-title\">{{ title }}</h4>\r\n    <div class=\"ds-alert-message\">\r\n      <ng-content />\r\n    </div>\r\n  </div>\r\n\r\n  <button *ngIf=\"dismissible\" type=\"button\" class=\"ds-alert-close\" (click)=\"onDismiss()\" aria-label=\"Close\">\r\n    <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\">\r\n      <path d=\"M18 6L6 18M6 6l12 12\" stroke-width=\"2\" stroke-linecap=\"round\" />\r\n    </svg>\r\n  </button>\r\n</div>\r\n"
+        },
+        {
             "name": "App",
-            "id": "component-App-ca8e316d961bb968e4bdf26ae44dd26ff4d97705387afb2842791bb03e06786c8ac24a3af734b7837f7048a175f2ca145cf78a88e29c137b2cab4d5f2a6ea85f",
+            "id": "component-App-4dbff7348d7f1a9fec0c036214993f232ee08ada9bc5d2764a9cb8cca9390f83213deeeac8b4d2e71a29c5f82a0dd4da4510da22b1995638772b867650c3bdb6",
             "file": "src/app/app.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -52,23 +383,7 @@
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "title",
-                    "defaultValue": "signal('design-system-orchestrator')",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 11,
-                    "modifierKind": [
-                        124,
-                        148
-                    ]
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -77,19 +392,157 @@
             "standalone": false,
             "imports": [
                 {
-                    "name": "Button"
+                    "name": "LandingComponent",
+                    "type": "component"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, signal } from '@angular/core';\r\nimport { Button } from './components/button/button';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [Button],\r\n  templateUrl: './app.html',\r\n  styleUrl: './app.scss'\r\n})\r\nexport class App {\r\n  protected readonly title = signal('design-system-orchestrator');\r\n}\r\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { LandingComponent } from './pages/landing/landing';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  imports: [LandingComponent],\r\n  templateUrl: './app.html',\r\n  styleUrl: './app.scss'\r\n})\r\nexport class App { }\r\n",
             "styleUrl": "./app.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div style=\"padding: 40px;\">\r\n  <h1>{{ title() }} - Design System Test</h1>\r\n  \r\n  <div style=\"display: flex; gap: 16px; margin-top: 24px; flex-wrap: wrap;\">\r\n    <ds-button variant=\"primary\">Primary Button</ds-button>\r\n    <ds-button variant=\"secondary\">Secondary Button</ds-button>\r\n    <ds-button variant=\"accent\">Accent Button</ds-button>\r\n    <ds-button variant=\"primary\" [disabled]=\"true\">Disabled</ds-button>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+            "templateData": "<app-landing></app-landing>\r\n\r\n\r\n"
+        },
+        {
+            "name": "AvatarComponent",
+            "id": "component-AvatarComponent-0fe120d4faba0940a1469cebcc6060e2719d39c1add6fdec82e87ec629ee0445dc86820645111771e16f95fae3f34b6187e66da63804a41ea7242fcb45d167a6",
+            "file": "src/app/components/avatar/avatar.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-avatar",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./avatar.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "alt",
+                    "defaultValue": "'Avatar'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "initials",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                    "decorators": []
+                },
+                {
+                    "name": "src",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-avatar',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './avatar.html',\r\n  styleUrl: './avatar.scss',\r\n})\r\nexport class AvatarComponent {\r\n  @Input() src: string = '';\r\n  @Input() alt: string = 'Avatar';\r\n  @Input() initials: string = '';\r\n  @Input() size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';\r\n}\r\n",
+            "styleUrl": "./avatar.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div [class]=\"'ds-avatar ds-avatar--' + size\">\r\n  <img *ngIf=\"src\" [src]=\"src\" [alt]=\"alt\" class=\"ds-avatar-img\" />\r\n  <span *ngIf=\"!src && initials\" class=\"ds-avatar-initials\">{{ initials }}</span>\r\n  <svg *ngIf=\"!src && !initials\" class=\"ds-avatar-icon\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n    <path\r\n      d=\"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\" />\r\n  </svg>\r\n</div>\r\n"
+        },
+        {
+            "name": "BadgeComponent",
+            "id": "component-BadgeComponent-31c80e1667160261c0ae6c4f1525f8b8af3162c08777b9f1cf6fce51da9bee670cb42e06e4a04bda68249e3078a6078d15a789dac22316f0d8645e71d0f574d0",
+            "file": "src/app/components/badge/badge.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-badge",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./badge.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "\"sm\" | \"md\"",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "\"default\" | \"accent\" | \"success\" | \"warning\" | \"error\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'ds-badge',\r\n  standalone: true,\r\n  templateUrl: './badge.html',\r\n  styleUrl: './badge.scss',\r\n})\r\nexport class BadgeComponent {\r\n  @Input() variant: 'default' | 'accent' | 'success' | 'warning' | 'error' = 'default';\r\n  @Input() size: 'sm' | 'md' = 'md';\r\n}\r\n",
+            "styleUrl": "./badge.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<span [class]=\"'ds-badge ds-badge--' + variant + ' ds-badge--' + size\">\r\n  <ng-content />\r\n</span>\r\n"
         },
         {
             "name": "Button",
@@ -283,6 +736,470 @@
             }
         },
         {
+            "name": "CardComponent",
+            "id": "component-CardComponent-5ce6844a48e465257f06e55249fe779c41075124199c8f570bacbdf76c3e62abfea8e9ebafbe1e5fedc820ebdbf8493098f9a7ad4133867f19565097b0c320c1",
+            "file": "src/app/components/card/card.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-card",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./card.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "padding",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"none\" | \"sm\" | \"md\" | \"lg\"",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'elevated'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"flat\" | \"elevated\" | \"outlined\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './card.html',\r\n  styleUrl: './card.scss',\r\n})\r\nexport class CardComponent {\r\n  @Input() variant: 'flat' | 'elevated' | 'outlined' = 'elevated';\r\n  @Input() padding: 'none' | 'sm' | 'md' | 'lg' = 'md';\r\n}\r\n",
+            "styleUrl": "./card.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div [class]=\"'ds-card ds-card--' + variant + ' ds-card--padding-' + padding\">\r\n  <ng-content />\r\n</div>\r\n"
+        },
+        {
+            "name": "CheckboxComponent",
+            "id": "component-CheckboxComponent-effa337aebac77e668dcd8d5baadc4387a22fa74177defcaedba3fd8d23617baa6575e05b36c547153b7483cdf5c8c94bdace2efa116aa75d9233b49f94b1341",
+            "file": "src/app/components/checkbox/checkbox.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-checkbox",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./checkbox.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "checkedChange",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onCheckChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-checkbox',\r\n  standalone: true,\r\n  imports: [FormsModule, CommonModule],\r\n  templateUrl: './checkbox.html',\r\n  styleUrl: './checkbox.scss',\r\n})\r\nexport class CheckboxComponent {\r\n  @Input() label: string = '';\r\n  @Input() checked: boolean = false;\r\n  @Input() disabled: boolean = false;\r\n  @Output() checkedChange = new EventEmitter<boolean>();\r\n\r\n  onCheckChange(event: Event) {\r\n    const target = event.target as HTMLInputElement;\r\n    this.checked = target.checked;\r\n    this.checkedChange.emit(this.checked);\r\n  }\r\n}\r\n",
+            "styleUrl": "./checkbox.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<label class=\"ds-checkbox-wrapper\" [class.disabled]=\"disabled\">\r\n  <input type=\"checkbox\" class=\"ds-checkbox-input\" [checked]=\"checked\" [disabled]=\"disabled\"\r\n    (change)=\"onCheckChange($event)\" />\r\n  <span class=\"ds-checkbox-box\">\r\n    <svg class=\"ds-checkbox-icon\" viewBox=\"0 0 16 16\" fill=\"none\">\r\n      <path d=\"M13.5 4L6 11.5L2.5 8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\r\n        stroke-linejoin=\"round\" />\r\n    </svg>\r\n  </span>\r\n  <span *ngIf=\"label\" class=\"ds-checkbox-label\">{{ label }}</span>\r\n</label>\r\n"
+        },
+        {
+            "name": "DropdownComponent",
+            "id": "component-DropdownComponent-3284b99524d04c8e90f9d436756d8a907b0a3e2a1edf9dc7d7dc7043787bce0a01d7b883712af43a19dc4b9175af963339cd97cfb451769bd99c05859ed72ca4",
+            "file": "src/app/components/dropdown/dropdown.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-dropdown",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./dropdown.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "DropdownOption[]",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "'Select an option'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "valueChange",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "selectedLabel",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onClickOutside",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 59,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:click', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        171
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "selectOption",
+                    "args": [
+                        {
+                            "name": "option",
+                            "type": "DropdownOption",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "option",
+                            "type": "DropdownOption",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleDropdown",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateSelectedLabel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "document:click",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 59
+                }
+            ],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport interface DropdownOption {\r\n  value: string;\r\n  label: string;\r\n  disabled?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-dropdown',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './dropdown.html',\r\n  styleUrl: './dropdown.scss',\r\n})\r\nexport class DropdownComponent {\r\n  @Input() label: string = '';\r\n  @Input() placeholder: string = 'Select an option';\r\n  @Input() options: DropdownOption[] = [];\r\n  @Input() value: string = '';\r\n  @Input() disabled: boolean = false;\r\n  @Output() valueChange = new EventEmitter<string>();\r\n\r\n  isOpen: boolean = false;\r\n  selectedLabel: string = '';\r\n\r\n  constructor(private elementRef: ElementRef) {}\r\n\r\n  ngOnInit() {\r\n    this.updateSelectedLabel();\r\n  }\r\n\r\n  ngOnChanges() {\r\n    this.updateSelectedLabel();\r\n  }\r\n\r\n  toggleDropdown() {\r\n    if (!this.disabled) {\r\n      this.isOpen = !this.isOpen;\r\n    }\r\n  }\r\n\r\n  selectOption(option: DropdownOption) {\r\n    if (!option.disabled) {\r\n      this.value = option.value;\r\n      this.selectedLabel = option.label;\r\n      this.valueChange.emit(this.value);\r\n      this.isOpen = false;\r\n    }\r\n  }\r\n\r\n  updateSelectedLabel() {\r\n    const selected = this.options.find(opt => opt.value === this.value);\r\n    this.selectedLabel = selected ? selected.label : '';\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onClickOutside(event: Event) {\r\n    if (!this.elementRef.nativeElement.contains(event.target)) {\r\n      this.isOpen = false;\r\n    }\r\n  }\r\n}\r\n",
+            "styleUrl": "./dropdown.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 26,
+                "jsdoctags": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "templateData": "<div class=\"ds-dropdown-wrapper\">\r\n  <label *ngIf=\"label\" class=\"ds-dropdown-label\">{{ label }}</label>\r\n\r\n  <div class=\"ds-dropdown\" [class.open]=\"isOpen\" [class.disabled]=\"disabled\">\r\n    <button type=\"button\" class=\"ds-dropdown-trigger\" (click)=\"toggleDropdown()\" [disabled]=\"disabled\">\r\n      <span class=\"ds-dropdown-text\">\r\n        {{ selectedLabel || placeholder }}\r\n      </span>\r\n      <svg class=\"ds-dropdown-icon\" viewBox=\"0 0 20 20\" fill=\"currentColor\">\r\n        <path fill-rule=\"evenodd\"\r\n          d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"\r\n          clip-rule=\"evenodd\" />\r\n      </svg>\r\n    </button>\r\n\r\n    <div *ngIf=\"isOpen\" class=\"ds-dropdown-menu\">\r\n      <button *ngFor=\"let option of options\" type=\"button\" class=\"ds-dropdown-item\" [class.disabled]=\"option.disabled\"\r\n        [class.selected]=\"option.value === value\" (click)=\"selectOption(option)\">\r\n        {{ option.label }}\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+        },
+        {
             "name": "HeaderComponent",
             "id": "component-HeaderComponent-48b9abe37706bc42f20cfa97ed9f943678344ea7d254c0c82183c657750c2191b43486fe730c778627b2ea6aa0e2f33a7abcf3ce08b68ad18b062ad99ea97acb",
             "file": "src/stories/header.component.ts",
@@ -367,6 +1284,441 @@
             ],
             "stylesData": "",
             "extends": []
+        },
+        {
+            "name": "InputComponent",
+            "id": "component-InputComponent-a782cfa5c10e94e27214a2d092ceb454dce99a6a3791ebe1858a321ae16e9081995a2db5866a0f07a165ff6df06fb51377bc2a94f40c0e0f0ddfc284e9dad5e9",
+            "file": "src/app/components/input/input.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-input",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./input.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "errorText",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "hasError",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "helperText",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'text'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "\"text\" | \"email\" | \"password\" | \"number\"",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "valueChange",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onValueChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-input',\r\n  standalone: true,\r\n  imports: [FormsModule, CommonModule],\r\n  templateUrl: './input.html',\r\n  styleUrl: './input.scss',\r\n})\r\nexport class InputComponent {\r\n  @Input() label: string = '';\r\n  @Input() placeholder: string = '';\r\n  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';\r\n  @Input() helperText: string = '';\r\n  @Input() errorText: string = '';\r\n  @Input() disabled: boolean = false;\r\n  @Input() hasError: boolean = false;\r\n  @Input() value: string = '';\r\n  @Output() valueChange = new EventEmitter<string>();\r\n\r\n  onValueChange(event: Event) {\r\n    const target = event.target as HTMLInputElement;\r\n    this.value = target.value;\r\n    this.valueChange.emit(this.value);\r\n  }\r\n}\r\n",
+            "styleUrl": "./input.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"ds-input-wrapper\">\r\n  <label *ngIf=\"label\" class=\"ds-input-label\">{{ label }}</label>\r\n\r\n  <input [type]=\"type\" [placeholder]=\"placeholder\" [disabled]=\"disabled\" [class.error]=\"hasError\" [value]=\"value\"\r\n    (input)=\"onValueChange($event)\" class=\"ds-input\" />\r\n\r\n  <p *ngIf=\"helperText && !hasError\" class=\"ds-input-helper\">\r\n    {{ helperText }}\r\n  </p>\r\n\r\n  <p *ngIf=\"errorText && hasError\" class=\"ds-input-error\">\r\n    {{ errorText }}\r\n  </p>\r\n</div>\r\n"
+        },
+        {
+            "name": "LandingComponent",
+            "id": "component-LandingComponent-55257c1adcf3ba9e13c5e10b9bdcb742fe678c12f2dd1f0e8f464c98e2a225a97b75dc613c889efc2c6af437673345e3f8c96e76b6f08d9ecfeecd51f546ac79",
+            "file": "src/app/pages/landing/landing.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-landing",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./landing.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "email",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "faqItems",
+                    "defaultValue": "[\r\n    {\r\n      id: '1',\r\n      title: '¿Cómo funciona la sincronización con Figma?',\r\n      content: 'Usamos un plugin personalizado que exporta las variables de Figma como tokens JSON. Estos se transforman automáticamente en SCSS y CSS mediante Style Dictionary.',\r\n    },\r\n    {\r\n      id: '2',\r\n      title: '¿Necesito conocimientos técnicos?',\r\n      content: 'Los diseñadores solo necesitan saber usar Figma. Los desarrolladores trabajan con Angular normalmente. El sistema maneja todo automáticamente.',\r\n    },\r\n    {\r\n      id: '3',\r\n      title: '¿Qué componentes incluye?',\r\n      content: 'Incluye 14+ componentes: Button, Input, Card, Badge, Avatar, Checkbox, Switch, Alert, Modal, Dropdown, Tabs, Tooltip, Toast y Accordion.',\r\n    },\r\n    {\r\n      id: '4',\r\n      title: '¿Es gratuito?',\r\n      content: 'Sí, es completamente open source. Puedes usarlo, modificarlo y distribuirlo libremente.',\r\n    },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "AccordionItem[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                },
+                {
+                    "name": "features",
+                    "defaultValue": "[\r\n    {\r\n      icon: '🎨',\r\n      title: 'Design Tokens',\r\n      description: 'Tokens sincronizados automáticamente desde Figma a tu código.',\r\n    },\r\n    {\r\n      icon: '⚡',\r\n      title: 'Desarrollo Rápido',\r\n      description: 'Componentes listos para usar con todas las variantes necesarias.',\r\n    },\r\n    {\r\n      icon: '🔄',\r\n      title: 'Actualización Automática',\r\n      description: 'Los cambios de diseño se reflejan sin tocar código.',\r\n    },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "testimonials",
+                    "defaultValue": "[\r\n    {\r\n      name: 'María González',\r\n      role: 'Product Designer',\r\n      avatar: 'https://i.pravatar.cc/150?img=5',\r\n      text: 'Este sistema cambió completamente nuestro flujo de trabajo. Ya no hay desincronización entre diseño y desarrollo.',\r\n    },\r\n    {\r\n      name: 'Carlos Ramírez',\r\n      role: 'Frontend Developer',\r\n      avatar: 'https://i.pravatar.cc/150?img=12',\r\n      text: 'Increíble productividad. Los tokens se actualizan automáticamente y todo funciona perfecto.',\r\n    },\r\n    {\r\n      name: 'Ana Torres',\r\n      role: 'Design Lead',\r\n      avatar: 'https://i.pravatar.cc/150?img=9',\r\n      text: 'Por fin un design system que realmente escala. Lo recomiendo 100%.',\r\n    },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 46
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onSubmit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 90,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "Button"
+                },
+                {
+                    "name": "CardComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "BadgeComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AvatarComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "InputComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AccordionComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { Button } from '../../components/button/button';\r\nimport { CardComponent } from '../../components/card/card';\r\nimport { BadgeComponent } from '../../components/badge/badge';\r\nimport { AvatarComponent } from '../../components/avatar/avatar';\r\nimport { InputComponent } from '../../components/input/input';\r\nimport { AccordionComponent, AccordionItem } from '../../components/accordion/accordion';\r\n\r\n@Component({\r\n  selector: 'app-landing',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    Button,\r\n    CardComponent,\r\n    BadgeComponent,\r\n    AvatarComponent,\r\n    InputComponent,\r\n    AccordionComponent,\r\n  ],\r\n  templateUrl: './landing.html',\r\n  styleUrl: './landing.scss',\r\n})\r\nexport class LandingComponent {\r\n  email: string = '';\r\n\r\n  features = [\r\n    {\r\n      icon: '🎨',\r\n      title: 'Design Tokens',\r\n      description: 'Tokens sincronizados automáticamente desde Figma a tu código.',\r\n    },\r\n    {\r\n      icon: '⚡',\r\n      title: 'Desarrollo Rápido',\r\n      description: 'Componentes listos para usar con todas las variantes necesarias.',\r\n    },\r\n    {\r\n      icon: '🔄',\r\n      title: 'Actualización Automática',\r\n      description: 'Los cambios de diseño se reflejan sin tocar código.',\r\n    },\r\n  ];\r\n\r\n  testimonials = [\r\n    {\r\n      name: 'María González',\r\n      role: 'Product Designer',\r\n      avatar: 'https://i.pravatar.cc/150?img=5',\r\n      text: 'Este sistema cambió completamente nuestro flujo de trabajo. Ya no hay desincronización entre diseño y desarrollo.',\r\n    },\r\n    {\r\n      name: 'Carlos Ramírez',\r\n      role: 'Frontend Developer',\r\n      avatar: 'https://i.pravatar.cc/150?img=12',\r\n      text: 'Increíble productividad. Los tokens se actualizan automáticamente y todo funciona perfecto.',\r\n    },\r\n    {\r\n      name: 'Ana Torres',\r\n      role: 'Design Lead',\r\n      avatar: 'https://i.pravatar.cc/150?img=9',\r\n      text: 'Por fin un design system que realmente escala. Lo recomiendo 100%.',\r\n    },\r\n  ];\r\n\r\n  faqItems: AccordionItem[] = [\r\n    {\r\n      id: '1',\r\n      title: '¿Cómo funciona la sincronización con Figma?',\r\n      content: 'Usamos un plugin personalizado que exporta las variables de Figma como tokens JSON. Estos se transforman automáticamente en SCSS y CSS mediante Style Dictionary.',\r\n    },\r\n    {\r\n      id: '2',\r\n      title: '¿Necesito conocimientos técnicos?',\r\n      content: 'Los diseñadores solo necesitan saber usar Figma. Los desarrolladores trabajan con Angular normalmente. El sistema maneja todo automáticamente.',\r\n    },\r\n    {\r\n      id: '3',\r\n      title: '¿Qué componentes incluye?',\r\n      content: 'Incluye 14+ componentes: Button, Input, Card, Badge, Avatar, Checkbox, Switch, Alert, Modal, Dropdown, Tabs, Tooltip, Toast y Accordion.',\r\n    },\r\n    {\r\n      id: '4',\r\n      title: '¿Es gratuito?',\r\n      content: 'Sí, es completamente open source. Puedes usarlo, modificarlo y distribuirlo libremente.',\r\n    },\r\n  ];\r\n\r\n  onSubmit() {\r\n    console.log('Email submitted:', this.email);\r\n    alert(`¡Gracias! Te contactaremos en ${this.email}`);\r\n  }\r\n}\r\n",
+            "styleUrl": "./landing.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"landing\">\r\n  <!-- HERO SECTION -->\r\n  <section class=\"hero\">\r\n    <div class=\"container\">\r\n      <div class=\"hero-content\">\r\n        <ds-badge variant=\"accent\" size=\"md\">Nuevo · Design System</ds-badge>\r\n\r\n        <h1 class=\"hero-title\">\r\n          Design System que se actualiza\r\n          <span class=\"highlight\">automáticamente</span>\r\n        </h1>\r\n\r\n        <p class=\"hero-description\">\r\n          Conecta Figma con tu código. Los cambios de diseño se reflejan\r\n          instantáneamente sin que los desarrolladores toquen una sola línea.\r\n        </p>\r\n\r\n        <div class=\"hero-actions\">\r\n          <ds-button variant=\"primary\">Comenzar gratis</ds-button>\r\n          <ds-button variant=\"secondary\">Ver documentación</ds-button>\r\n        </div>\r\n\r\n        <div class=\"hero-stats\">\r\n          <div class=\"stat\">\r\n            <span class=\"stat-number\">14+</span>\r\n            <span class=\"stat-label\">Componentes</span>\r\n          </div>\r\n          <div class=\"stat\">\r\n            <span class=\"stat-number\">100%</span>\r\n            <span class=\"stat-label\">Automático</span>\r\n          </div>\r\n          <div class=\"stat\">\r\n            <span class=\"stat-number\">0</span>\r\n            <span class=\"stat-label\">Configuración</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- FEATURES SECTION -->\r\n  <section class=\"features\">\r\n    <div class=\"container\">\r\n      <div class=\"section-header\">\r\n        <h2 class=\"section-title\">Todo lo que necesitas</h2>\r\n        <p class=\"section-description\">\r\n          Un sistema completo de extremo a extremo\r\n        </p>\r\n      </div>\r\n\r\n      <div class=\"features-grid\">\r\n        <ds-card *ngFor=\"let feature of features\" variant=\"elevated\" padding=\"lg\">\r\n          <div class=\"feature-icon\">{{ feature.icon }}</div>\r\n          <h3 class=\"feature-title\">{{ feature.title }}</h3>\r\n          <p class=\"feature-description\">{{ feature.description }}</p>\r\n        </ds-card>\r\n      </div>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- TESTIMONIALS SECTION -->\r\n  <section class=\"testimonials\">\r\n    <div class=\"container\">\r\n      <div class=\"section-header\">\r\n        <h2 class=\"section-title\">Lo que dicen nuestros usuarios</h2>\r\n      </div>\r\n\r\n      <div class=\"testimonials-grid\">\r\n        <ds-card *ngFor=\"let testimonial of testimonials\" variant=\"outlined\" padding=\"lg\">\r\n          <div class=\"testimonial-header\">\r\n            <ds-avatar [src]=\"testimonial.avatar\" [alt]=\"testimonial.name\" size=\"lg\">\r\n            </ds-avatar>\r\n            <div class=\"testimonial-info\">\r\n              <h4 class=\"testimonial-name\">{{ testimonial.name }}</h4>\r\n              <p class=\"testimonial-role\">{{ testimonial.role }}</p>\r\n            </div>\r\n          </div>\r\n          <p class=\"testimonial-text\">\"{{ testimonial.text }}\"</p>\r\n        </ds-card>\r\n      </div>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- FAQ SECTION -->\r\n  <section class=\"faq\">\r\n    <div class=\"container\">\r\n      <div class=\"section-header\">\r\n        <h2 class=\"section-title\">Preguntas frecuentes</h2>\r\n      </div>\r\n\r\n      <ds-accordion [items]=\"faqItems\" [allowMultiple]=\"false\"></ds-accordion>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- CTA SECTION -->\r\n  <section class=\"cta\">\r\n    <div class=\"container\">\r\n      <ds-card variant=\"elevated\" padding=\"lg\">\r\n        <div class=\"cta-content\">\r\n          <h2 class=\"cta-title\">¿Listo para comenzar?</h2>\r\n          <p class=\"cta-description\">\r\n            Únete a cientos de equipos que ya usan nuestro design system\r\n          </p>\r\n\r\n          <div class=\"cta-form\">\r\n            <ds-input type=\"email\" placeholder=\"tu@email.com\" [(value)]=\"email\"></ds-input>\r\n            <ds-button variant=\"accent\" (click)=\"onSubmit()\">\r\n              Empezar ahora\r\n            </ds-button>\r\n          </div>\r\n        </div>\r\n      </ds-card>\r\n    </div>\r\n  </section>\r\n\r\n  <!-- FOOTER -->\r\n  <footer class=\"footer\">\r\n    <div class=\"container\">\r\n      <div class=\"footer-content\">\r\n        <div class=\"footer-brand\">\r\n          <h3>Design System</h3>\r\n          <p>Hecho con ❤️ usando Angular 19</p>\r\n        </div>\r\n\r\n        <div class=\"footer-links\">\r\n          <div class=\"footer-column\">\r\n            <h4>Producto</h4>\r\n            <a href=\"#\">Características</a>\r\n            <a href=\"#\">Precios</a>\r\n            <a href=\"#\">Documentación</a>\r\n          </div>\r\n\r\n          <div class=\"footer-column\">\r\n            <h4>Recursos</h4>\r\n            <a href=\"#\">Blog</a>\r\n            <a href=\"#\">Guías</a>\r\n            <a href=\"#\">Storybook</a>\r\n          </div>\r\n\r\n          <div class=\"footer-column\">\r\n            <h4>Legal</h4>\r\n            <a href=\"#\">Privacidad</a>\r\n            <a href=\"#\">Términos</a>\r\n            <a href=\"#\">Licencia</a>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"footer-bottom\">\r\n        <p>© 2026 Design System Orchestrator. MIT License.</p>\r\n      </div>\r\n    </div>\r\n  </footer>\r\n</div>\r\n"
+        },
+        {
+            "name": "ModalComponent",
+            "id": "component-ModalComponent-bb61b4c17defe9e012492ade406c5921d122a1c51c2e65e83980c527cf986980d705c63add16cade3e72e353a12b8ac0c4224f29820dec9925c302ce2cbd35e7",
+            "file": "src/app/components/modal/modal.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-modal",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./modal.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "\"sm\" | \"md\" | \"lg\"",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "close",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onClose",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onEscapeKey",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:keydown.escape'"
+                        }
+                    ],
+                    "modifierKind": [
+                        171
+                    ]
+                },
+                {
+                    "name": "onOverlayClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "document:keydown.escape",
+                    "args": [],
+                    "argsDecorator": [],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29
+                }
+            ],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-modal',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './modal.html',\r\n  styleUrl: './modal.scss',\r\n})\r\nexport class ModalComponent {\r\n  @Input() isOpen: boolean = false;\r\n  @Input() title: string = '';\r\n  @Input() size: 'sm' | 'md' | 'lg' = 'md';\r\n  @Output() close = new EventEmitter<void>();\r\n\r\n  onClose() {\r\n    this.close.emit();\r\n  }\r\n\r\n  onOverlayClick(event: MouseEvent) {\r\n    if ((event.target as HTMLElement).classList.contains('ds-modal-overlay')) {\r\n      this.onClose();\r\n    }\r\n  }\r\n\r\n  @HostListener('document:keydown.escape')\r\n  onEscapeKey() {\r\n    if (this.isOpen) {\r\n      this.onClose();\r\n    }\r\n  }\r\n}\r\n",
+            "styleUrl": "./modal.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div *ngIf=\"isOpen\" class=\"ds-modal-overlay\" (click)=\"onOverlayClick($event)\">\r\n  <div [class]=\"'ds-modal ds-modal--' + size\" role=\"dialog\" aria-modal=\"true\">\r\n    <div class=\"ds-modal-header\">\r\n      <h2 class=\"ds-modal-title\">{{ title }}</h2>\r\n      <button type=\"button\" class=\"ds-modal-close\" (click)=\"onClose()\" aria-label=\"Close\">\r\n        <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\">\r\n          <path d=\"M18 6L6 18M6 6l12 12\" stroke-width=\"2\" stroke-linecap=\"round\" />\r\n        </svg>\r\n      </button>\r\n    </div>\r\n\r\n    <div class=\"ds-modal-body\">\r\n      <ng-content />\r\n    </div>\r\n\r\n    <div class=\"ds-modal-footer\">\r\n      <ng-content select=\"[footer]\" />\r\n    </div>\r\n  </div>\r\n</div>\r\n"
         },
         {
             "name": "PageComponent",
@@ -461,6 +1813,450 @@
             ],
             "stylesData": "",
             "extends": []
+        },
+        {
+            "name": "SwitchComponent",
+            "id": "component-SwitchComponent-c2cb3da1aa37ace3b9b345a036e4d6844f022135edc2400d8bd53e237d199042ae7a7abd5ef8d8cdce0e62a0deacb524b50cd60ff21600ef8f9d6ab76dc09854",
+            "file": "src/app/components/switch/switch.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-switch",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./switch.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "\"sm\" | \"md\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "checkedChange",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onToggle",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-switch',\r\n  standalone: true,\r\n  imports: [FormsModule, CommonModule],\r\n  templateUrl: './switch.html',\r\n  styleUrl: './switch.scss',\r\n})\r\nexport class SwitchComponent {\r\n  @Input() label: string = '';\r\n  @Input() checked: boolean = false;\r\n  @Input() disabled: boolean = false;\r\n  @Input() size: 'sm' | 'md' = 'md';\r\n  @Output() checkedChange = new EventEmitter<boolean>();\r\n\r\n  onToggle() {\r\n    if (!this.disabled) {\r\n      this.checked = !this.checked;\r\n      this.checkedChange.emit(this.checked);\r\n    }\r\n  }\r\n}\r\n",
+            "styleUrl": "./switch.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<label class=\"ds-switch-wrapper\" [class.disabled]=\"disabled\">\r\n  <button type=\"button\" role=\"switch\" [attr.aria-checked]=\"checked\" [class]=\"'ds-switch ds-switch--' + size\"\r\n    [class.checked]=\"checked\" [disabled]=\"disabled\" (click)=\"onToggle()\">\r\n    <span class=\"ds-switch-thumb\"></span>\r\n  </button>\r\n  <span *ngIf=\"label\" class=\"ds-switch-label\">{{ label }}</span>\r\n</label>\r\n"
+        },
+        {
+            "name": "TabsComponent",
+            "id": "component-TabsComponent-c2f5dbe062f7133030ae309dbd5b4359f9614fad9998806b0d234295bcd41e3e96a041de72b4c99ea1eadc621684a6d6cef1315b061681e6c99af2ea3a9626bf",
+            "file": "src/app/components/tabs/tabs.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-tabs",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./tabs.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "activeTab",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "tabs",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "Tab[]",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'line'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "\"line\" | \"pill\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "tabChange",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "selectTab",
+                    "args": [
+                        {
+                            "name": "tab",
+                            "type": "Tab",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "tab",
+                            "type": "Tab",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport interface Tab {\r\n  id: string;\r\n  label: string;\r\n  disabled?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-tabs',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './tabs.html',\r\n  styleUrl: './tabs.scss',\r\n})\r\nexport class TabsComponent {\r\n  @Input() tabs: Tab[] = [];\r\n  @Input() activeTab: string = '';\r\n  @Input() variant: 'line' | 'pill' = 'line';\r\n  @Output() tabChange = new EventEmitter<string>();\r\n\r\n  ngOnInit() {\r\n    if (!this.activeTab && this.tabs.length > 0) {\r\n      this.activeTab = this.tabs[0].id;\r\n    }\r\n  }\r\n\r\n  selectTab(tab: Tab) {\r\n    if (!tab.disabled) {\r\n      this.activeTab = tab.id;\r\n      this.tabChange.emit(tab.id);\r\n    }\r\n  }\r\n}\r\n",
+            "styleUrl": "./tabs.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div [class]=\"'ds-tabs ds-tabs--' + variant\">\r\n  <div class=\"ds-tabs-list\" role=\"tablist\">\r\n    <button *ngFor=\"let tab of tabs\" type=\"button\" role=\"tab\" [class]=\"'ds-tabs-trigger'\"\r\n      [class.active]=\"tab.id === activeTab\" [class.disabled]=\"tab.disabled\" [attr.aria-selected]=\"tab.id === activeTab\"\r\n      [disabled]=\"tab.disabled\" (click)=\"selectTab(tab)\">\r\n      {{ tab.label }}\r\n    </button>\r\n  </div>\r\n\r\n  <div class=\"ds-tabs-content\">\r\n    <ng-content />\r\n  </div>\r\n</div>\r\n"
+        },
+        {
+            "name": "ToastComponent",
+            "id": "component-ToastComponent-cf6019e82d68118b5bf3a710901adbf2030d0e048f28c4d0e31a78483c5473416e88eb6e2631ec098af1881bc5778290b4332cb1bf00a257c3d8dda73ce7fe50",
+            "file": "src/app/components/toast/toast.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-toast",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./toast.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "dismissible",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "duration",
+                    "defaultValue": "5000",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "dismiss",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onDismiss",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-toast',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './toast.html',\r\n  styleUrl: './toast.scss',\r\n})\r\nexport class ToastComponent implements OnInit {\r\n  @Input() variant: 'info' | 'success' | 'warning' | 'error' = 'info';\r\n  @Input() title: string = '';\r\n  @Input() message: string = '';\r\n  @Input() duration: number = 5000; // 5 segundos por defecto\r\n  @Input() dismissible: boolean = true;\r\n  @Output() dismiss = new EventEmitter<void>();\r\n\r\n  ngOnInit() {\r\n    if (this.duration > 0) {\r\n      setTimeout(() => {\r\n        this.onDismiss();\r\n      }, this.duration);\r\n    }\r\n  }\r\n\r\n  onDismiss() {\r\n    this.dismiss.emit();\r\n  }\r\n}\r\n",
+            "styleUrl": "./toast.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div [class]=\"'ds-toast ds-toast--' + variant\">\r\n  <div class=\"ds-toast-icon\">\r\n    <svg *ngIf=\"variant === 'info'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z\" />\r\n    </svg>\r\n    <svg *ngIf=\"variant === 'success'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\" />\r\n    </svg>\r\n    <svg *ngIf=\"variant === 'warning'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z\" />\r\n    </svg>\r\n    <svg *ngIf=\"variant === 'error'\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\r\n      <path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z\" />\r\n    </svg>\r\n  </div>\r\n\r\n  <div class=\"ds-toast-content\">\r\n    <h4 class=\"ds-toast-title\">{{ title }}</h4>\r\n    <p class=\"ds-toast-message\">{{ message }}</p>\r\n  </div>\r\n\r\n  <button *ngIf=\"dismissible\" type=\"button\" class=\"ds-toast-close\" (click)=\"onDismiss()\" aria-label=\"Close\">\r\n    <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\">\r\n      <path d=\"M18 6L6 18M6 6l12 12\" stroke-width=\"2\" stroke-linecap=\"round\" />\r\n    </svg>\r\n  </button>\r\n</div>\r\n"
+        },
+        {
+            "name": "TooltipComponent",
+            "id": "component-TooltipComponent-f1d78170c35a5132edc86ece84b831eef01fb50de040bd1c731ab1fc3d68880e0c43bdb553a2ab5d465f7a6a17450c9523add354a4104dec135a850e7605dc7e",
+            "file": "src/app/components/tooltip/tooltip.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-tooltip",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./tooltip.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "position",
+                    "defaultValue": "'top'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isVisible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "hide",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "show",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'ds-tooltip',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './tooltip.html',\r\n  styleUrl: './tooltip.scss',\r\n})\r\nexport class TooltipComponent {\r\n  @Input() text: string = '';\r\n  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'top';\r\n\r\n  isVisible: boolean = false;\r\n\r\n  show() {\r\n    this.isVisible = true;\r\n  }\r\n\r\n  hide() {\r\n    this.isVisible = false;\r\n  }\r\n}\r\n",
+            "styleUrl": "./tooltip.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"ds-tooltip-wrapper\" (mouseenter)=\"show()\" (mouseleave)=\"hide()\">\r\n  <ng-content />\r\n\r\n  <div *ngIf=\"isVisible\" [class]=\"'ds-tooltip ds-tooltip--' + position\">\r\n    {{ text }}\r\n    <div class=\"ds-tooltip-arrow\"></div>\r\n  </div>\r\n</div>\r\n"
         }
     ],
     "modules": [],
@@ -504,7 +2300,7 @@
         "children": []
     },
     "coverage": {
-        "count": 11,
+        "count": 3,
         "status": "low",
         "files": [
             {
@@ -523,7 +2319,52 @@
                 "linktype": "component",
                 "name": "App",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/accordion/accordion.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AccordionComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/accordion/accordion.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "AccordionItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/alert/alert.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AlertComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/avatar/avatar.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AvatarComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/badge/badge.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "BadgeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -533,6 +2374,114 @@
                 "name": "Button",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/card/card.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/checkbox/checkbox.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CheckboxComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/dropdown/dropdown.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DropdownComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/17",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/dropdown/dropdown.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DropdownOption",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/input/input.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/modal/modal.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ModalComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/switch/switch.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SwitchComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tabs/tabs.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TabsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tabs/tabs.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Tab",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/toast/toast.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ToastComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tooltip/tooltip.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TooltipComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/landing/landing.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LandingComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {

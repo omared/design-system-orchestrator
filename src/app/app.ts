@@ -1,12 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { Button } from './components/button/button';
+import { Component } from '@angular/core';
+import { LandingComponent } from './pages/landing/landing';
 
 @Component({
   selector: 'app-root',
-  imports: [Button],
+  imports: [LandingComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('design-system-orchestrator');
-}
+export class App { }

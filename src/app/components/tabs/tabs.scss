@@ -1,0 +1,69 @@
+@use 'tokens/variables' as tokens;
+
+.ds-tabs {
+  width: 100%;
+}
+
+.ds-tabs-list {
+  display: flex;
+  gap: tokens.$ds-layout-spacing-xs;
+  border-bottom: 2px solid tokens.$ds-border-border-color-secondary-default;
+
+  .ds-tabs--pill & {
+    border-bottom: none;
+  }
+}
+
+.ds-tabs-trigger {
+  padding: tokens.$ds-layout-spacing-sm tokens.$ds-layout-spacing-md;
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-family: tokens.$ds-font-inter;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
+  border: none;
+  background: transparent;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  border-radius: 0;
+
+  .ds-tabs--pill & {
+    border-radius: tokens.$ds-corner-corner-radius-xs;
+  }
+
+  &:hover:not(:disabled) {
+    color: tokens.$ds-text-default-text-color-primary-default;
+    background: tokens.$ds-background-background-color-secundary-default;
+  }
+
+  &.active {
+    color: tokens.$ds-text-default-text-color-accent-default;
+
+    .ds-tabs--line & {
+      background: transparent;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: tokens.$ds-color-purple-purple-500;
+      }
+    }
+
+    .ds-tabs--pill & {
+      background: tokens.$ds-background-background-color-accent-default;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.ds-tabs-content {
+  padding: tokens.$ds-layout-spacing-xl 0;
+}

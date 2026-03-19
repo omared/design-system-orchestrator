@@ -1,0 +1,78 @@
+@use 'tokens/variables' as tokens;
+
+.ds-switch-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-sm;
+  cursor: pointer;
+  user-select: none;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.ds-switch {
+  position: relative;
+  border: none;
+  border-radius: 9999px;
+  background: tokens.$ds-color-neutral-neutral-300;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 0;
+
+  &:focus-visible {
+    outline: 2px solid tokens.$ds-color-purple-purple-500;
+    outline-offset: 2px;
+  }
+
+  &--sm {
+    width: 32px;
+    height: 20px;
+
+    .ds-switch-thumb {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.checked .ds-switch-thumb {
+      transform: translateX(12px);
+    }
+  }
+
+  &--md {
+    width: 44px;
+    height: 24px;
+
+    .ds-switch-thumb {
+      width: 20px;
+      height: 20px;
+    }
+
+    &.checked .ds-switch-thumb {
+      transform: translateX(20px);
+    }
+  }
+
+  &.checked {
+    background: tokens.$ds-color-purple-purple-500;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.ds-switch-thumb {
+  display: block;
+  border-radius: 50%;
+  background: tokens.$ds-color-base-white;
+  transition: transform 0.2s ease;
+  margin: 2px;
+}
+
+.ds-switch-label {
+  font-size: tokens.$ds-font-size-font-size-200;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}

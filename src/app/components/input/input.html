@@ -1,0 +1,14 @@
+<div class="ds-input-wrapper">
+  <label *ngIf="label" class="ds-input-label">{{ label }}</label>
+
+  <input [type]="type" [placeholder]="placeholder" [disabled]="disabled" [class.error]="hasError" [value]="value"
+    (input)="onValueChange($event)" class="ds-input" />
+
+  <p *ngIf="helperText && !hasError" class="ds-input-helper">
+    {{ helperText }}
+  </p>
+
+  <p *ngIf="errorText && hasError" class="ds-input-error">
+    {{ errorText }}
+  </p>
+</div>

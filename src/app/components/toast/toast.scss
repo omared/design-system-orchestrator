@@ -1,0 +1,109 @@
+@use 'tokens/variables' as tokens;
+
+.ds-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: tokens.$ds-layout-spacing-sm;
+  padding: tokens.$ds-layout-spacing-md;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  background: tokens.$ds-background-background-color-primary-default;
+  box-shadow: 0 4px 12px rgba(tokens.$ds-color-neutral-neutral-900, 0.15);
+  max-width: 400px;
+  animation: slideIn 0.3s ease;
+  border-left: 4px solid;
+
+  &--info {
+    border-color: tokens.$ds-color-blue-blue-500;
+
+    .ds-toast-icon {
+      color: tokens.$ds-color-blue-blue-500;
+    }
+  }
+
+  &--success {
+    border-color: tokens.$ds-color-green-green-500;
+
+    .ds-toast-icon {
+      color: tokens.$ds-color-green-green-500;
+    }
+  }
+
+  &--warning {
+    border-color: tokens.$ds-color-orange-orange-500;
+
+    .ds-toast-icon {
+      color: tokens.$ds-color-orange-orange-500;
+    }
+  }
+
+  &--error {
+    border-color: tokens.$ds-color-red-red-500;
+
+    .ds-toast-icon {
+      color: tokens.$ds-color-red-red-500;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ds-toast-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.ds-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ds-toast-title {
+  margin: 0 0 tokens.$ds-spacing-scale-4-size-4 0;
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-weight: tokens.$ds-font-weight-font-weight-600;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.ds-toast-message {
+  margin: 0;
+  font-size: tokens.$ds-font-size-font-size-200;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  line-height: 1.5;
+}
+
+.ds-toast-close {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: tokens.$ds-text-default-text-color-primary-default;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}

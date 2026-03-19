@@ -1,0 +1,64 @@
+@use 'tokens/variables' as tokens;
+
+.ds-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xs;
+}
+
+.ds-input-label {
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-weight: tokens.$ds-font-weight-font-weight-600;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.ds-input {
+  padding: tokens.$ds-layout-spacing-sm tokens.$ds-layout-spacing-md;
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-family: tokens.$ds-font-inter;
+  border: tokens.$ds-stroke-stroke-xs solid tokens.$ds-border-border-color-secondary-default;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  background: tokens.$ds-background-background-color-primary-default;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  transition: all 0.2s ease;
+  outline: none;
+
+  &::placeholder {
+    color: tokens.$ds-text-default-text-color-secundary-default;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: tokens.$ds-border-border-color-primary-default;
+  }
+
+  &:focus {
+    border-color: tokens.$ds-border-border-color-accent-default;
+    box-shadow: 0 0 0 3px rgba(tokens.$ds-color-purple-purple-500, 0.1);
+  }
+
+  &.error {
+    border-color: tokens.$ds-border-border-color-error-default;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(tokens.$ds-color-red-red-500, 0.1);
+    }
+  }
+
+  &:disabled {
+    background: tokens.$ds-background-background-color-secundary-default;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.ds-input-helper {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  margin: 0;
+}
+
+.ds-input-error {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-error-default;
+  margin: 0;
+}

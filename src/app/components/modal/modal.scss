@@ -1,0 +1,113 @@
+@use 'tokens/variables' as tokens;
+
+.ds-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(tokens.$ds-color-neutral-neutral-900, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: tokens.$ds-layout-spacing-xl;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.ds-modal {
+  background: tokens.$ds-background-background-color-primary-default;
+  border-radius: tokens.$ds-corner-corner-radius-lg;
+  box-shadow: 0 20px 50px rgba(tokens.$ds-color-neutral-neutral-900, 0.2);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+
+  &--sm {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  &--md {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  &--lg {
+    width: 100%;
+    max-width: 800px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ds-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: tokens.$ds-layout-spacing-xl;
+  border-bottom: 1px solid tokens.$ds-border-border-color-secondary-default;
+}
+
+.ds-modal-title {
+  margin: 0;
+  font-size: tokens.$ds-font-size-font-size-400;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.ds-modal-close {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: tokens.$ds-text-default-text-color-primary-default;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.ds-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: tokens.$ds-layout-spacing-xl;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.ds-modal-footer {
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  border-top: 1px solid tokens.$ds-border-border-color-secondary-default;
+  display: flex;
+  gap: tokens.$ds-layout-spacing-sm;
+  justify-content: flex-end;
+}

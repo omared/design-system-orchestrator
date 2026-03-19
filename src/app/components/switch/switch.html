@@ -1,0 +1,7 @@
+<label class="ds-switch-wrapper" [class.disabled]="disabled">
+  <button type="button" role="switch" [attr.aria-checked]="checked" [class]="'ds-switch ds-switch--' + size"
+    [class.checked]="checked" [disabled]="disabled" (click)="onToggle()">
+    <span class="ds-switch-thumb"></span>
+  </button>
+  <span *ngIf="label" class="ds-switch-label">{{ label }}</span>
+</label>

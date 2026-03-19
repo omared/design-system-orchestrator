@@ -1,0 +1,27 @@
+<div [class]="'ds-toast ds-toast--' + variant">
+  <div class="ds-toast-icon">
+    <svg *ngIf="variant === 'info'" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+    </svg>
+    <svg *ngIf="variant === 'success'" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+    </svg>
+    <svg *ngIf="variant === 'warning'" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+    </svg>
+    <svg *ngIf="variant === 'error'" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+    </svg>
+  </div>
+
+  <div class="ds-toast-content">
+    <h4 class="ds-toast-title">{{ title }}</h4>
+    <p class="ds-toast-message">{{ message }}</p>
+  </div>
+
+  <button *ngIf="dismissible" type="button" class="ds-toast-close" (click)="onDismiss()" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+</div>

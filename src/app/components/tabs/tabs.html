@@ -1,0 +1,13 @@
+<div [class]="'ds-tabs ds-tabs--' + variant">
+  <div class="ds-tabs-list" role="tablist">
+    <button *ngFor="let tab of tabs" type="button" role="tab" [class]="'ds-tabs-trigger'"
+      [class.active]="tab.id === activeTab" [class.disabled]="tab.disabled" [attr.aria-selected]="tab.id === activeTab"
+      [disabled]="tab.disabled" (click)="selectTab(tab)">
+      {{ tab.label }}
+    </button>
+  </div>
+
+  <div class="ds-tabs-content">
+    <ng-content />
+  </div>
+</div>

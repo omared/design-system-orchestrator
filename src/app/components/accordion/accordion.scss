@@ -1,0 +1,71 @@
+@use 'tokens/variables' as tokens;
+
+.ds-accordion {
+  border: 1px solid tokens.$ds-border-border-color-secondary-default;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  overflow: hidden;
+}
+
+.ds-accordion-item {
+  border-bottom: 1px solid tokens.$ds-border-border-color-secondary-default;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.ds-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-lg;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    background: tokens.$ds-background-background-color-secundary-default;
+  }
+
+  .ds-accordion-item.open & {
+    background: tokens.$ds-background-background-color-secundary-default;
+  }
+}
+
+.ds-accordion-title {
+  font-size: tokens.$ds-font-size-font-size-300;
+  font-weight: tokens.$ds-font-weight-font-weight-600;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.ds-accordion-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  transition: transform 0.2s ease;
+
+  .ds-accordion-item.open & {
+    transform: rotate(180deg);
+  }
+}
+
+.ds-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  &.open {
+    max-height: 500px;
+  }
+}
+
+.ds-accordion-body {
+  padding: 0 tokens.$ds-layout-spacing-lg tokens.$ds-layout-spacing-md;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  font-size: tokens.$ds-font-size-font-size-200;
+  line-height: 1.6;
+}

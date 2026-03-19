@@ -1,0 +1,8 @@
+<div class="ds-tooltip-wrapper" (mouseenter)="show()" (mouseleave)="hide()">
+  <ng-content />
+
+  <div *ngIf="isVisible" [class]="'ds-tooltip ds-tooltip--' + position">
+    {{ text }}
+    <div class="ds-tooltip-arrow"></div>
+  </div>
+</div>

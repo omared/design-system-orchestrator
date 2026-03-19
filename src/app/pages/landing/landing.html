@@ -1,0 +1,154 @@
+<div class="landing">
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <ds-badge variant="accent" size="md">Nuevo · Design System</ds-badge>
+
+        <h1 class="hero-title">
+          Design System que se actualiza
+          <span class="highlight">automáticamente</span>
+        </h1>
+
+        <p class="hero-description">
+          Conecta Figma con tu código. Los cambios de diseño se reflejan
+          instantáneamente sin que los desarrolladores toquen una sola línea.
+        </p>
+
+        <div class="hero-actions">
+          <ds-button variant="primary">Comenzar gratis</ds-button>
+          <ds-button variant="secondary">Ver documentación</ds-button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">14+</span>
+            <span class="stat-label">Componentes</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Automático</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Configuración</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Todo lo que necesitas</h2>
+        <p class="section-description">
+          Un sistema completo de extremo a extremo
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <ds-card *ngFor="let feature of features" variant="elevated" padding="lg">
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3 class="feature-title">{{ feature.title }}</h3>
+          <p class="feature-description">{{ feature.description }}</p>
+        </ds-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Lo que dicen nuestros usuarios</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <ds-card *ngFor="let testimonial of testimonials" variant="outlined" padding="lg">
+          <div class="testimonial-header">
+            <ds-avatar [src]="testimonial.avatar" [alt]="testimonial.name" size="lg">
+            </ds-avatar>
+            <div class="testimonial-info">
+              <h4 class="testimonial-name">{{ testimonial.name }}</h4>
+              <p class="testimonial-role">{{ testimonial.role }}</p>
+            </div>
+          </div>
+          <p class="testimonial-text">"{{ testimonial.text }}"</p>
+        </ds-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+      </div>
+
+      <ds-accordion [items]="faqItems" [allowMultiple]="false"></ds-accordion>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <div class="container">
+      <ds-card variant="elevated" padding="lg">
+        <div class="cta-content">
+          <h2 class="cta-title">¿Listo para comenzar?</h2>
+          <p class="cta-description">
+            Únete a cientos de equipos que ya usan nuestro design system
+          </p>
+
+          <div class="cta-form">
+            <ds-input type="email" placeholder="tu@email.com" [(value)]="email"></ds-input>
+            <ds-button variant="accent" (click)="onSubmit()">
+              Empezar ahora
+            </ds-button>
+          </div>
+        </div>
+      </ds-card>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Design System</h3>
+          <p>Hecho con ❤️ usando Angular 19</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Producto</h4>
+            <a href="#">Características</a>
+            <a href="#">Precios</a>
+            <a href="#">Documentación</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Recursos</h4>
+            <a href="#">Blog</a>
+            <a href="#">Guías</a>
+            <a href="#">Storybook</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <a href="#">Privacidad</a>
+            <a href="#">Términos</a>
+            <a href="#">Licencia</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Design System Orchestrator. MIT License.</p>
+      </div>
+    </div>
+  </footer>
+</div>

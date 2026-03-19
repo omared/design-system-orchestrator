@@ -1,0 +1,58 @@
+@use 'tokens/variables' as tokens;
+
+.ds-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; // ← Cambia esto por un valor fijo para círculos
+  background: tokens.$ds-background-background-color-accent-default;
+  color: tokens.$ds-text-default-text-color-accent-default;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  &--xs {
+    width: 24px;
+    height: 24px;
+    font-size: tokens.$ds-font-size-font-size-50;
+  }
+
+  &--sm {
+    width: 32px;
+    height: 32px;
+    font-size: tokens.$ds-font-size-font-size-100;
+  }
+
+  &--md {
+    width: 40px;
+    height: 40px;
+    font-size: tokens.$ds-font-size-font-size-200;
+  }
+
+  &--lg {
+    width: 48px;
+    height: 48px;
+    font-size: tokens.$ds-font-size-font-size-300;
+  }
+
+  &--xl {
+    width: 64px;
+    height: 64px;
+    font-size: tokens.$ds-font-size-font-size-400;
+  }
+}
+
+.ds-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ds-avatar-initials {
+  font-weight: tokens.$ds-font-weight-font-weight-600;
+  text-transform: uppercase;
+}
+
+.ds-avatar-icon {
+  width: 60%;
+  height: 60%;
+}
