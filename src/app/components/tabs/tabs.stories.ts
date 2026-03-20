@@ -5,6 +5,9 @@ const meta: Meta<TabsComponent> = {
   title: 'Components/Tabs',
   component: TabsComponent,
   tags: ['autodocs'],
+  argTypes: {
+    tabChange: { action: 'tabChange' },
+  },
 };
 
 export default meta;
@@ -65,6 +68,35 @@ export const WithDisabled: Story = {
       <ds-tabs [tabs]="tabs" [variant]="variant">
         <div style="padding: 20px; background: #f8fafc; border-radius: 8px;">
           The "Details" tab is disabled.
+        </div>
+      </ds-tabs>
+    `,
+  }),
+};
+
+export const Interactive: Story = {
+  args: {
+    tabs,
+    variant: 'line',
+    activeTab: 'tab1',
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      content: {
+        tab1: 'This is the Overview tab content.',
+        tab2: 'This is the Details tab content with more information.',
+        tab3: 'This is the Settings tab where you can configure options.',
+      },
+    },
+    template: `
+      <ds-tabs 
+        [tabs]="tabs" 
+        [variant]="variant"
+        [activeTab]="activeTab"
+        (tabChange)="activeTab = $event">
+        <div style="padding: 20px; background: #f8fafc; border-radius: 8px;">
+          <p style="margin: 0;">{{ content[activeTab] }}</p>
         </div>
       </ds-tabs>
     `,

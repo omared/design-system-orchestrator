@@ -5,6 +5,9 @@ const meta: Meta<ModalComponent> = {
   title: 'Components/Modal',
   component: ModalComponent,
   tags: ['autodocs'],
+  argTypes: {
+    close: { action: 'close' },
+  },
 };
 
 export default meta;
@@ -22,7 +25,7 @@ export const Default: Story = {
       <ds-modal [isOpen]="isOpen" [title]="title" [size]="size">
         <p>This is the modal content. You can put any content here.</p>
         <p style="margin-top: 12px;">In a real app, you would control isOpen with a button.</p>
-
+        
         <div footer style="display: flex; gap: 12px;">
           <button style="padding: 8px 16px; background: #e3e3e4; border: none; border-radius: 6px; cursor: pointer;">
             Cancel
@@ -47,7 +50,7 @@ export const Small: Story = {
     template: `
       <ds-modal [isOpen]="isOpen" [title]="title" [size]="size">
         <p>This is a small modal with less width.</p>
-
+        
         <div footer style="display: flex; gap: 12px;">
           <button style="padding: 8px 16px; background: #7a0cff; color: white; border: none; border-radius: 6px; cursor: pointer;">
             OK
@@ -70,7 +73,7 @@ export const Large: Story = {
       <ds-modal [isOpen]="isOpen" [title]="title" [size]="size">
         <p>This is a large modal with more width for complex content.</p>
         <p style="margin-top: 12px;">It can hold forms, tables, or detailed information.</p>
-
+        
         <div footer style="display: flex; gap: 12px;">
           <button style="padding: 8px 16px; background: #e3e3e4; border: none; border-radius: 6px; cursor: pointer;">
             Cancel
@@ -102,13 +105,55 @@ export const WithLongContent: Story = {
         <p style="margin-top: 12px;">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
         <p style="margin-top: 12px;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
         <p style="margin-top: 12px;">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
-
+        
         <div footer style="display: flex; gap: 12px;">
           <button style="padding: 8px 16px; background: #7a0cff; color: white; border: none; border-radius: 6px; cursor: pointer;">
             Close
           </button>
         </div>
       </ds-modal>
+    `,
+  }),
+};
+
+export const Interactive: Story = {
+  args: {
+    isOpen: false,
+    title: 'Controlled Modal',
+    size: 'md',
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <div>
+        <button 
+          (click)="isOpen = true" 
+          style="padding: 12px 20px; background: #7a0cff; color: white; border: none; border-radius: 8px; cursor: pointer;">
+          Open Modal
+        </button>
+
+        <ds-modal 
+          [isOpen]="isOpen" 
+          [title]="title" 
+          [size]="size" 
+          (close)="isOpen = false">
+          <p>This modal can be opened and closed interactively.</p>
+          <p style="margin-top: 12px;">Click outside, press ESC, or click the X button to close.</p>
+          
+          <div footer style="display: flex; gap: 12px;">
+            <button 
+              (click)="isOpen = false" 
+              style="padding: 8px 16px; background: #e3e3e4; border: none; border-radius: 6px; cursor: pointer;">
+              Cancel
+            </button>
+            <button 
+              (click)="isOpen = false" 
+              style="padding: 8px 16px; background: #7a0cff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+              Confirm
+            </button>
+          </div>
+        </ds-modal>
+      </div>
     `,
   }),
 };

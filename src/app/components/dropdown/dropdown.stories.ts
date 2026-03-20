@@ -5,6 +5,9 @@ const meta: Meta<DropdownComponent> = {
   title: 'Components/Dropdown',
   component: DropdownComponent,
   tags: ['autodocs'],
+  argTypes: {
+    valueChange: { action: 'valueChange' },
+  },
 };
 
 export default meta;
@@ -54,4 +57,31 @@ export const WithDisabledOptions: Story = {
       { value: 'mx', label: 'Mexico' },
     ],
   },
+};
+
+export const Interactive: Story = {
+  args: {
+    label: 'Select your country',
+    placeholder: 'Choose...',
+    options: countries,
+    value: '',
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <div>
+        <ds-dropdown 
+          [label]="label"
+          [placeholder]="placeholder"
+          [options]="options"
+          [value]="value"
+          [disabled]="disabled"
+          (valueChange)="value = $event">
+        </ds-dropdown>
+        <p style="margin-top: 12px; color: #71717a;">
+          Selected: <strong>{{ value || '(none)' }}</strong>
+        </p>
+      </div>
+    `,
+  }),
 };

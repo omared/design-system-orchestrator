@@ -1,3 +1,4 @@
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { SwitchComponent } from './switch';
 
@@ -5,6 +6,9 @@ const meta: Meta<SwitchComponent> = {
   title: 'Components/Switch',
   component: SwitchComponent,
   tags: ['autodocs'],
+  argTypes: {
+    checkedChange: { action: 'checkedChange' },
+  },
 };
 
 export default meta;
@@ -44,4 +48,29 @@ export const WithoutLabel: Story = {
   args: {
     size: 'md',
   },
+};
+
+export const Interactive: Story = {
+  args: {
+    label: 'Dark mode',
+    checked: false,
+    size: 'md',
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <div>
+        <ds-switch 
+          [label]="label"
+          [checked]="checked"
+          [size]="size"
+          [disabled]="disabled"
+          (checkedChange)="checked = $event">
+        </ds-switch>
+        <p style="margin-top: 12px; color: #71717a;">
+          Mode: <strong>{{ checked ? 'Dark 🌙' : 'Light ☀️' }}</strong>
+        </p>
+      </div>
+    `,
+  }),
 };

@@ -1,3 +1,4 @@
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { AlertComponent } from './alert';
 
@@ -5,6 +6,9 @@ const meta: Meta<AlertComponent> = {
   title: 'Components/Alert',
   component: AlertComponent,
   tags: ['autodocs'],
+  argTypes: {
+    dismiss: { action: 'dismiss' },
+  },
 };
 
 export default meta;
@@ -77,11 +81,28 @@ export const Dismissible: Story = {
     dismissible: true,
   },
   render: (args) => ({
-    props: args,
+    props: {
+      ...args,
+      visible: true,
+    },
     template: `
-      <ds-alert [variant]="variant" [title]="title" [dismissible]="dismissible">
-        You can close this alert by clicking the X button.
-      </ds-alert>
+      <div>
+        <ds-alert 
+          *ngIf="visible"
+          [variant]="variant" 
+          [title]="title" 
+          [dismissible]="dismissible"
+          (dismiss)="visible = false">
+          You can close this alert by clicking the X button.
+        </ds-alert>
+        
+        <button 
+          *ngIf="!visible"
+          (click)="visible = true"
+          style="padding: 8px 16px; background: #7a0cff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+          Show Alert Again
+        </button>
+      </div>
     `,
   }),
 };
