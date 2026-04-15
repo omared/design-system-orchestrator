@@ -1,0 +1,361 @@
+@use 'tokens/variables' as tokens;
+
+.transfer-form {
+  min-height: 100dvh;
+  background: tokens.$ds-color-neutral-neutral-50;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Header ────────────────────────────────────────────────────────────────
+
+.page-header {
+  background: tokens.$ds-background-background-color-primary-default;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid tokens.$ds-border-border-color-secondary-default;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.page-header__back {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  transition: background 0.15s;
+  flex-shrink: 0;
+
+  svg { width: 20px; height: 20px; }
+
+  &:hover { background: tokens.$ds-color-neutral-neutral-50; }
+}
+
+.page-header__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.page-header__title {
+  font-size: tokens.$ds-font-size-font-size-400;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  margin: 0;
+}
+
+.page-header__subtitle {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-success-default;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: tokens.$ds-text-default-text-color-success-default;
+    border-radius: 50%;
+  }
+}
+
+.page-header__spacer {
+  width: 40px;
+}
+
+// ─── Stepper ───────────────────────────────────────────────────────────────
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  background: tokens.$ds-background-background-color-primary-default;
+  gap: 0;
+}
+
+.stepper__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xxs;
+}
+
+.stepper__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: tokens.$ds-color-neutral-neutral-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+
+  &--active {
+    background: tokens.$ds-color-purple-purple-500;
+    color: #fff;
+  }
+
+  &--done {
+    background: tokens.$ds-color-green-green-500;
+    color: #fff;
+  }
+}
+
+.stepper__label {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+}
+
+.stepper__line {
+  flex: 1;
+  height: 2px;
+  background: tokens.$ds-color-neutral-neutral-100;
+  margin: 0 tokens.$ds-layout-spacing-xs;
+  margin-bottom: tokens.$ds-layout-spacing-md;
+  max-width: 60px;
+}
+
+// ─── Body ──────────────────────────────────────────────────────────────────
+
+.transfer-form__body {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: tokens.$ds-layout-spacing-xl tokens.$ds-layout-spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xl;
+  padding-bottom: 100px; // space for sticky CTA
+
+  @media (min-width: 740px) {
+    padding: tokens.$ds-layout-spacing-xxl tokens.$ds-layout-spacing-xl;
+    padding-bottom: tokens.$ds-layout-spacing-xxl;
+  }
+}
+
+// ─── Form groups ───────────────────────────────────────────────────────────
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xs;
+}
+
+.form-label {
+  font-size: tokens.$ds-font-size-font-size-200;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.form-error {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-error-default;
+}
+
+.form-helper {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+}
+
+// ─── Balance chip ──────────────────────────────────────────────────────────
+
+.balance-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xxs;
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  background: tokens.$ds-background-background-color-success-default;
+  padding: tokens.$ds-layout-spacing-xxs tokens.$ds-layout-spacing-xs;
+  border-radius: tokens.$ds-corner-corner-radius-xxs;
+
+  svg { width: 12px; height: 12px; color: tokens.$ds-text-default-text-color-success-default; }
+
+  strong { color: tokens.$ds-text-default-text-color-success-default; }
+}
+
+// ─── Amount input ──────────────────────────────────────────────────────────
+
+.amount-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xs;
+  background: tokens.$ds-background-background-color-primary-default;
+  border: 2px solid tokens.$ds-border-border-color-secondary-default;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-md;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: tokens.$ds-color-purple-purple-500;
+    box-shadow: 0 0 0 3px rgba(tokens.$ds-color-purple-purple-500, 0.1);
+  }
+
+  &--error {
+    border-color: tokens.$ds-color-red-red-500;
+
+    &:focus-within {
+      border-color: tokens.$ds-color-red-red-500;
+      box-shadow: 0 0 0 3px rgba(tokens.$ds-color-red-red-500, 0.1);
+    }
+  }
+}
+
+.amount-input-currency {
+  font-size: tokens.$ds-font-size-font-size-600;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  line-height: 1;
+}
+
+.amount-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: tokens.$ds-font-size-font-size-600;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  font-family: tokens.$ds-font-inter, system-ui, sans-serif;
+  background: transparent;
+  min-width: 0;
+
+  &::placeholder {
+    color: tokens.$ds-color-neutral-neutral-200;
+  }
+}
+
+// ─── Partial Summary ───────────────────────────────────────────────────────
+
+.partial-summary {
+  background: tokens.$ds-background-background-color-accent-default;
+  border-radius: tokens.$ds-corner-corner-radius-md;
+  padding: tokens.$ds-layout-spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xs;
+  border: 1px solid tokens.$ds-border-border-color-accent-default;
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.partial-summary__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: tokens.$ds-font-size-font-size-200;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+
+  span:last-child {
+    color: tokens.$ds-text-default-text-color-primary-default;
+    font-weight: tokens.$ds-font-weight-font-weight-500;
+  }
+
+  &--total {
+    padding-top: tokens.$ds-layout-spacing-xs;
+    border-top: 1px solid tokens.$ds-border-border-color-accent-default;
+    font-size: tokens.$ds-font-size-font-size-300;
+
+    strong {
+      font-size: tokens.$ds-font-size-font-size-400;
+      font-weight: tokens.$ds-font-weight-font-weight-700;
+      color: tokens.$ds-text-default-text-color-accent-default;
+    }
+  }
+}
+
+.partial-summary__fee {
+  display: flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xxs;
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-success-default;
+
+  svg { width: 12px; height: 12px; }
+
+  strong { color: tokens.$ds-text-default-text-color-success-default; }
+}
+
+// ─── CTA ───────────────────────────────────────────────────────────────────
+
+.transfer-form__cta {
+  padding: tokens.$ds-layout-spacing-md;
+  background: tokens.$ds-background-background-color-primary-default;
+  border-top: 1px solid tokens.$ds-border-border-color-secondary-default;
+
+  @media (max-width: 739px) {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  @media (min-width: 740px) {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    padding: tokens.$ds-layout-spacing-xl;
+    background: transparent;
+    border-top: none;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  background: tokens.$ds-color-purple-purple-500;
+  color: #fff;
+  border: none;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  font-size: tokens.$ds-font-size-font-size-300;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
+  font-family: tokens.$ds-font-inter, system-ui, sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.$ds-layout-spacing-xs;
+  transition: background 0.2s, transform 0.1s;
+  min-height: 52px;
+
+  svg { width: 18px; height: 18px; }
+
+  &:hover:not(:disabled) {
+    background: tokens.$ds-color-purple-purple-600;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled, &--disabled {
+    background: tokens.$ds-button-state-disabled-color-bg-disabled;
+    cursor: not-allowed;
+  }
+}
+
+// Expose isLoading (not a real prop, just guard)
+:host {
+  display: block;
+}

@@ -1,0 +1,176 @@
+<div class="transfer-summary">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="page-header__back" (click)="goBack()" aria-label="Editar transferencia">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="page-header__center">
+      <h1 class="page-header__title">Resumen</h1>
+      <span class="page-header__subtitle">Revisa antes de confirmar</span>
+    </div>
+    <div class="page-header__spacer"></div>
+  </header>
+
+  <!-- Stepper -->
+  <div class="stepper" aria-label="Paso 2 de 3: Resumen">
+    <div class="stepper__step stepper__step--done">
+      <span class="stepper__dot stepper__dot--done">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="stepper__label">Datos</span>
+    </div>
+    <div class="stepper__line stepper__line--done"></div>
+    <div class="stepper__step">
+      <span class="stepper__dot stepper__dot--active">2</span>
+      <span class="stepper__label">Resumen</span>
+    </div>
+    <div class="stepper__line"></div>
+    <div class="stepper__step">
+      <span class="stepper__dot">3</span>
+      <span class="stepper__label">Listo</span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="transfer-summary__body">
+
+    @if (errorMessage) {
+      <ds-alert variant="error" [title]="errorMessage" [dismissible]="true" (dismiss)="errorMessage = ''" />
+    }
+
+    <!-- Amount hero -->
+    <div class="summary-hero">
+      <span class="summary-hero__label">Vas a transferir</span>
+      <span class="summary-hero__amount">{{ formatCurrency(amount) }}</span>
+    </div>
+
+    <!-- Details card -->
+    <div class="summary-card" role="region" aria-label="Detalles de la transferencia">
+
+      <div class="summary-row">
+        <div class="summary-row__icon summary-row__icon--origin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="summary-row__content">
+          <span class="summary-row__label">Cuenta origen</span>
+          <span class="summary-row__value">{{ originAccount?.alias }}</span>
+          <span class="summary-row__sub">{{ originAccount?.accountNumber }}</span>
+        </div>
+      </div>
+
+      <div class="summary-divider">
+        <div class="summary-divider__line"></div>
+        <div class="summary-divider__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="summary-divider__line"></div>
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-row__icon summary-row__icon--dest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="summary-row__content">
+          <span class="summary-row__label">Cuenta destino</span>
+          <span class="summary-row__value">{{ destinationAccount?.alias }}</span>
+          <span class="summary-row__sub">{{ destinationAccount?.accountNumber }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Totals -->
+    <div class="totals-card" role="region" aria-label="Costo total">
+      <div class="totals-row">
+        <span>Valor transferido</span>
+        <span>{{ formatCurrency(amount) }}</span>
+      </div>
+      <div class="totals-row">
+        <span>Comisión</span>
+        <span class="totals-row__free">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8l3 3 7-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Gratis
+        </span>
+      </div>
+      <div class="totals-row totals-row--total">
+        <strong>Total debitado</strong>
+        <strong>{{ formatCurrency(total) }}</strong>
+      </div>
+    </div>
+
+    <!-- Edit link -->
+    <button class="edit-link" (click)="goBack()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Editar transferencia
+    </button>
+
+  </div>
+
+  <!-- Sticky CTA -->
+  <div class="transfer-summary__cta">
+    <button class="confirm-btn" (click)="openConfirmModal()">
+      Confirmar transferencia
+    </button>
+  </div>
+
+</div>
+
+<!-- ─── Confirmation Modal ────────────────────────────────────────────────── -->
+<ds-modal
+  [isOpen]="showConfirmModal"
+  title="¿Confirmas la transferencia?"
+  size="sm"
+  (close)="closeConfirmModal()"
+>
+  <div class="modal-body">
+    <p class="modal-body__text">
+      Estás a punto de transferir
+      <strong>{{ formatCurrency(amount) }}</strong>
+      a
+      <strong>{{ destinationAccount?.alias }}</strong>.
+    </p>
+    <p class="modal-body__hint">Esta acción no se puede deshacer.</p>
+
+    @if (errorMessage) {
+      <ds-alert variant="error" [title]="errorMessage" />
+    }
+  </div>
+
+  <div footer class="modal-footer">
+    <button
+      class="modal-btn modal-btn--secondary"
+      (click)="closeConfirmModal()"
+      [disabled]="isConfirming"
+    >
+      Cancelar
+    </button>
+    <button
+      class="modal-btn modal-btn--primary"
+      (click)="confirm()"
+      [disabled]="isConfirming"
+      aria-live="polite"
+    >
+      @if (isConfirming) {
+        <span class="modal-spinner" aria-hidden="true"></span>
+        Procesando...
+      } @else {
+        Confirmar
+      }
+    </button>
+  </div>
+</ds-modal>

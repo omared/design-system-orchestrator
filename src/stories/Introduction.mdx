@@ -1,0 +1,919 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="NeoBank Design System" />
+
+<style>
+  {`
+    .ds-intro {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: #2d2d31;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    .ds-hero {
+      background: linear-gradient(135deg, #0f0120 0%, #1e0440 40%, #2d0966 100%);
+      border-radius: 0 0 24px 24px;
+      padding: 64px 48px;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ds-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(122,12,255,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(14,165,233,0.2) 0%, transparent 50%);
+    }
+    .ds-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .ds-hero-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .ds-hero-logo-icon {
+      width: 48px;
+      height: 48px;
+      background: #7a0cff;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ds-hero-logo-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .ds-hero-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 0 0 16px;
+    }
+    .ds-hero-title span {
+      background: linear-gradient(90deg, #af6dff, #3eb7ed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ds-hero-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 0 40px;
+    }
+    .ds-hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .ds-hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .ds-hero-stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .ds-hero-stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Section ──────────────────────────────────────────────────── */
+    .ds-section {
+      padding: 0 48px;
+      margin-bottom: 56px;
+    }
+    .ds-section-header {
+      margin-bottom: 28px;
+    }
+    .ds-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #7a0cff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    .ds-section-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #2d2d31;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+    .ds-section-desc {
+      font-size: 15px;
+      color: #71717a;
+      margin: 8px 0 0;
+    }
+    .ds-divider {
+      height: 1px;
+      background: #e3e3e4;
+      margin: 56px 48px;
+    }
+
+    /* ── Color Palette ────────────────────────────────────────────── */
+    .ds-palette-row {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .ds-palette-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .ds-palette-scale-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ds-palette-swatches {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .ds-swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .ds-swatch-color {
+      width: 64px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.15s;
+      cursor: default;
+    }
+    .ds-swatch-color:hover {
+      transform: scale(1.08);
+    }
+    .ds-swatch-hex {
+      font-size: 10px;
+      color: #8d8d95;
+      font-family: 'Courier New', monospace;
+    }
+    .ds-swatch-name {
+      font-size: 10px;
+      color: #aaaaaf;
+    }
+
+    /* Semantic colors */
+    .ds-semantic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .ds-semantic-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .ds-semantic-swatch {
+      height: 52px;
+    }
+    .ds-semantic-info {
+      padding: 8px 10px;
+      background: #fff;
+    }
+    .ds-semantic-role {
+      font-size: 12px;
+      font-weight: 600;
+      color: #2d2d31;
+    }
+    .ds-semantic-hex {
+      font-size: 10px;
+      color: #8d8d95;
+      font-family: monospace;
+    }
+
+    /* ── Typography ───────────────────────────────────────────────── */
+    .ds-type-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid #e3e3e4;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .ds-type-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 24px;
+      border-bottom: 1px solid #f1f1f2;
+      background: #fff;
+      transition: background 0.15s;
+    }
+    .ds-type-row:last-child { border-bottom: none; }
+    .ds-type-row:hover { background: #fafafa; }
+    .ds-type-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 120px;
+    }
+    .ds-type-token {
+      font-size: 11px;
+      font-weight: 600;
+      color: #7a0cff;
+      font-family: monospace;
+    }
+    .ds-type-size {
+      font-size: 11px;
+      color: #8d8d95;
+    }
+    .ds-type-sample {
+      color: #2d2d31;
+      font-family: 'Inter', system-ui, sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Spacing ──────────────────────────────────────────────────── */
+    .ds-spacing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ds-spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .ds-spacing-bar-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .ds-spacing-bar {
+      background: linear-gradient(90deg, #7a0cff, #af6dff);
+      border-radius: 4px;
+      height: 20px;
+    }
+    .ds-spacing-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #7a0cff;
+      font-family: monospace;
+      min-width: 90px;
+    }
+    .ds-spacing-val {
+      font-size: 12px;
+      color: #71717a;
+      min-width: 36px;
+    }
+
+    /* ── Components Grid ──────────────────────────────────────────── */
+    .ds-components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .ds-component-card {
+      background: #fff;
+      border: 1px solid #e3e3e4;
+      border-radius: 14px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .ds-component-card:hover {
+      border-color: #ca9eff;
+      box-shadow: 0 4px 16px rgba(122,12,255,0.1);
+      transform: translateY(-2px);
+    }
+    .ds-component-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+    .ds-component-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2d2d31;
+    }
+    .ds-component-desc {
+      font-size: 12px;
+      color: #8d8d95;
+      line-height: 1.4;
+    }
+    .ds-component-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: #f2e7ff;
+      color: #7a0cff;
+      width: fit-content;
+    }
+    .ds-component-tag--new {
+      background: #e9f9ef;
+      color: #1b9e4b;
+    }
+
+    /* ── Neobank Flow ──────────────────────────────────────────────── */
+    .ds-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 16px;
+    }
+    .ds-flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .ds-flow-screen {
+      width: 140px;
+      background: #fff;
+      border-radius: 16px;
+      border: 1.5px solid #e3e3e4;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .ds-flow-screen-bar {
+      height: 8px;
+      background: linear-gradient(90deg, #7a0cff, #0ea5e9);
+    }
+    .ds-flow-screen-body {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 120px;
+    }
+    .ds-flow-screen-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: #2d2d31;
+    }
+    .ds-flow-screen-line {
+      height: 5px;
+      border-radius: 3px;
+      background: #f1f1f2;
+    }
+    .ds-flow-screen-btn {
+      height: 14px;
+      border-radius: 4px;
+      background: #7a0cff;
+      margin-top: 4px;
+    }
+    .ds-flow-screen-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+    }
+    .ds-flow-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #2d2d31;
+      text-align: center;
+    }
+    .ds-flow-sublabel {
+      font-size: 10px;
+      color: #8d8d95;
+      text-align: center;
+      margin-top: -8px;
+    }
+    .ds-flow-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      margin-top: 52px;
+      color: #ca9eff;
+    }
+
+    /* ── Border Radius ────────────────────────────────────────────── */
+    .ds-radius-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+    .ds-radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .ds-radius-box {
+      background: linear-gradient(135deg, #f2e7ff, #e4ceff);
+      border: 2px solid #ca9eff;
+      width: 56px;
+      height: 56px;
+    }
+    .ds-radius-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #7a0cff;
+      font-family: monospace;
+      text-align: center;
+    }
+    .ds-radius-val {
+      font-size: 10px;
+      color: #8d8d95;
+      text-align: center;
+    }
+
+    /* ── Getting started ──────────────────────────────────────────── */
+    .ds-code-block {
+      background: #0f0120;
+      border-radius: 14px;
+      padding: 24px;
+      overflow-x: auto;
+    }
+    .ds-code-block pre {
+      margin: 0;
+      font-family: 'Courier New', 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #e2d9f3;
+    }
+    .ds-code-keyword { color: #af6dff; }
+    .ds-code-string  { color: #7adc9e; }
+    .ds-code-comment { color: #5a5a62; font-style: italic; }
+    .ds-code-tag     { color: #6ec9f2; }
+
+    /* ── Badges ───────────────────────────────────────────────────── */
+    .ds-badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .ds-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .ds-badge--purple  { background: #f2e7ff; color: #7a0cff; }
+    .ds-badge--blue    { background: #e7f6fd; color: #0b84ba; }
+    .ds-badge--green   { background: #e9f9ef; color: #1b9e4b; }
+    .ds-badge--gray    { background: #f1f1f2; color: #444449; }
+  `}
+</style>
+
+<div className="ds-intro">
+
+  {/* ── HERO ───────────────────────────────────────────────────────────── */}
+  <div className="ds-hero">
+    <div className="ds-hero-inner">
+      <div className="ds-hero-logo">
+        <div className="ds-hero-logo-icon">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+            <path d="M12 20c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/>
+            <circle cx="20" cy="20" r="3" fill="#fff"/>
+          </svg>
+        </div>
+        <span className="ds-hero-logo-name">NeoBank Design System</span>
+      </div>
+
+      <h1 className="ds-hero-title">
+        El puente entre<br/>
+        <span>Figma y Angular</span>
+      </h1>
+      <p className="ds-hero-subtitle">
+        Sistema de diseño completo con tokens sincronizados automáticamente desde Figma.
+        Componentes listos para producción, documentados y accesibles.
+      </p>
+
+      <div className="ds-hero-stats">
+        <div className="ds-hero-stat">
+          <span className="ds-hero-stat-num">15</span>
+          <span className="ds-hero-stat-label">Componentes</span>
+        </div>
+        <div className="ds-hero-stat">
+          <span className="ds-hero-stat-num">120+</span>
+          <span className="ds-hero-stat-label">Design Tokens</span>
+        </div>
+        <div className="ds-hero-stat">
+          <span className="ds-hero-stat-num">7</span>
+          <span className="ds-hero-stat-label">Paletas de color</span>
+        </div>
+        <div className="ds-hero-stat">
+          <span className="ds-hero-stat-num">3</span>
+          <span className="ds-hero-stat-label">Breakpoints</span>
+        </div>
+      </div>
+
+      <div className="ds-badge-row">
+        <span className="ds-badge ds-badge--purple">Angular 20</span>
+        <span className="ds-badge ds-badge--blue">Storybook 10</span>
+        <span className="ds-badge ds-badge--green">Style Dictionary 5</span>
+        <span className="ds-badge ds-badge--gray">TypeScript 5.7</span>
+      </div>
+    </div>
+  </div>
+
+  {/* ── COMPONENTES ────────────────────────────────────────────────────── */}
+  <div className="ds-section">
+    <div className="ds-section-header">
+      <div className="ds-section-label">Biblioteca</div>
+      <h2 className="ds-section-title">Componentes disponibles</h2>
+      <p className="ds-section-desc">Todos los componentes son standalone, accesibles y usan tokens del sistema.</p>
+    </div>
+
+    <div className="ds-components-grid">
+      {[
+        { icon: "🪗", name: "Accordion",  desc: "Secciones colapsables. Permite apertura múltiple o exclusiva.", tag: null },
+        { icon: "🔔", name: "Alert",      desc: "Mensajes de estado: info, success, warning, error.", tag: null },
+        { icon: "👤", name: "Avatar",     desc: "Imagen de perfil con fallback a iniciales. 5 tamaños.", tag: null },
+        { icon: "🏷️", name: "Badge",      desc: "Etiquetas de estado y categoría. 5 variantes de color.", tag: null },
+        { icon: "🔘", name: "Button",     desc: "Acción primaria, secundaria y accent. Estados completos.", tag: null },
+        { icon: "🃏", name: "Card",       desc: "Contenedor elevado, plano u outlined. 4 niveles de padding.", tag: null },
+        { icon: "☑️", name: "Checkbox",   desc: "Selección booleana con two-way binding.", tag: null },
+        { icon: "🔽", name: "Dropdown",   desc: "Selector con opciones. Soporte disabled por opción.", tag: null },
+        { icon: "✏️", name: "Input",      desc: "Campo de texto con label, helper text y error inline.", tag: null },
+        { icon: "🪟", name: "Modal",      desc: "Diálogo overlay. 3 tamaños. Cierra con ESC o click fuera.", tag: null },
+        { icon: "🔁", name: "Switch",     desc: "Toggle on/off. 2 tamaños. Con label y two-way binding.", tag: null },
+        { icon: "📑", name: "Tabs",       desc: "Navegación por pestañas. Variantes line y pill.", tag: null },
+        { icon: "🍞", name: "Toast",      desc: "Notificación temporal. Auto-dismiss configurable.", tag: null },
+        { icon: "💬", name: "Tooltip",    desc: "Info contextual en 4 posiciones.", tag: null },
+        { icon: "💀", name: "Skeleton",   desc: "Placeholder de carga animado. 3 variantes de forma.", tag: "Nuevo" },
+      ].map((c) => (
+        <div className="ds-component-card" key={c.name}>
+          <span className="ds-component-icon">{c.icon}</span>
+          <div>
+            <div className="ds-component-name">{c.name}</div>
+            {c.tag && <span className={`ds-component-tag ds-component-tag--new`}>{c.tag}</span>}
+          </div>
+          <div className="ds-component-desc">{c.desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="ds-divider" />
+
+  {/* ── COLORES ────────────────────────────────────────────────────────── */}
+  <div className="ds-section">
+    <div className="ds-section-header">
+      <div className="ds-section-label">Tokens / Color</div>
+      <h2 className="ds-section-title">Paleta de colores</h2>
+      <p className="ds-section-desc">Cada color está disponible en 10 niveles (50–900) + transparencia (0).</p>
+    </div>
+
+    <div className="ds-palette-row">
+      {[
+        { name: "Purple — Brand",  colors: ["#f2e7ff","#e4ceff","#ca9eff","#af6dff","#953dff","#7a0cff","#620acc","#490799","#310566","#180233"] },
+        { name: "Neutral — Base",  colors: ["#f1f1f2","#e3e3e4","#c6c6ca","#aaaaaf","#8d8d95","#71717a","#5a5a62","#444449","#2d2d31","#171718"] },
+        { name: "Green — Success", colors: ["#e9f9ef","#d3f3df","#a7e8bf","#7adc9e","#4ed17e","#22c55e","#1b9e4b","#147638","#0e4f26","#072713"] },
+        { name: "Red — Error",     colors: ["#fdecec","#fcdada","#f9b4b4","#f58f8f","#f26969","#ef4444","#c13737","#932929","#661c1c","#380e0e"] },
+        { name: "Orange — Warning",colors: ["#fff1e5","#ffe4cc","#ffc999","#ffad66","#ff9233","#ff7700","#cc5f00","#994700","#663000","#331800"] },
+        { name: "Blue — Info",     colors: ["#e7f6fd","#cfedfb","#9fdbf6","#6ec9f2","#3eb7ed","#0ea5e9","#0b84ba","#08638c","#06425d","#03212f"] },
+        { name: "Yellow",          colors: ["#fff9e5","#fff4cc","#ffe999","#ffde66","#ffd333","#ffc800","#cca000","#997800","#665000","#332800"] },
+      ].map((scale) => (
+        <div className="ds-palette-scale" key={scale.name}>
+          <div className="ds-palette-scale-name">{scale.name}</div>
+          <div className="ds-palette-swatches">
+            {scale.colors.map((hex, i) => (
+              <div className="ds-swatch" key={hex}>
+                <div className="ds-swatch-color" style={{ background: hex }} title={hex} />
+                <span className="ds-swatch-name">{(i + 1) * 50}</span>
+                <span className="ds-swatch-hex">{hex}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ── Colores semánticos ─────────────────────────────────────────────── */}
+  <div className="ds-section" style={{ marginTop: -24 }}>
+    <div className="ds-section-label" style={{ marginBottom: 12 }}>Colores semánticos</div>
+    <div className="ds-semantic-grid">
+      {[
+        { role: "Text primary",    hex: "#2d2d31", bg: "#2d2d31" },
+        { role: "Text secondary",  hex: "#71717a", bg: "#71717a" },
+        { role: "Text accent",     hex: "#7a0cff", bg: "#7a0cff" },
+        { role: "Text success",    hex: "#1b9e4b", bg: "#1b9e4b" },
+        { role: "Text warning",    hex: "#cc5f00", bg: "#cc5f00" },
+        { role: "Text error",      hex: "#c13737", bg: "#c13737" },
+        { role: "Text link",       hex: "#0b84ba", bg: "#0b84ba" },
+        { role: "Bg primary",      hex: "#ffffff", bg: "#ffffff" },
+        { role: "Bg secondary",    hex: "rgba(241,241,242,0.5)", bg: "#f1f1f2" },
+        { role: "Bg accent",       hex: "rgba(242,231,255,0.5)", bg: "#f2e7ff" },
+        { role: "Bg success",      hex: "rgba(233,249,239,0.5)", bg: "#e9f9ef" },
+        { role: "Bg warning",      hex: "rgba(255,241,229,0.5)", bg: "#fff1e5" },
+      ].map((s) => (
+        <div className="ds-semantic-card" key={s.role}>
+          <div className="ds-semantic-swatch" style={{ background: s.bg, border: s.bg === '#ffffff' ? '1px solid #e3e3e4' : 'none' }} />
+          <div className="ds-semantic-info">
+            <div className="ds-semantic-role">{s.role}</div>
+            <div className="ds-semantic-hex">{s.hex}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="ds-divider" />
+
+  {/* ── TIPOGRAFÍA ─────────────────────────────────────────────────────── */}
+  <div className="ds-section">
+    <div className="ds-section-header">
+      <div className="ds-section-label">Tokens / Tipografía</div>
+      <h2 className="ds-section-title">Escala tipográfica</h2>
+      <p className="ds-section-desc">Fuente base: <strong>Inter</strong>. Pesos disponibles: Regular (400), Medium (500), SemiBold (700).</p>
+    </div>
+
+    <div className="ds-type-scale">
+      {[
+        { token: "font-size-900", size: "64px", weight: 700, sample: "Display XL" },
+        { token: "font-size-800", size: "48px", weight: 700, sample: "Display" },
+        { token: "font-size-700", size: "36px", weight: 700, sample: "Heading 1" },
+        { token: "font-size-600", size: "28px", weight: 700, sample: "Heading 2" },
+        { token: "font-size-500", size: "24px", weight: 500, sample: "Heading 3" },
+        { token: "font-size-400", size: "18px", weight: 500, sample: "Subtitle" },
+        { token: "font-size-300", size: "16px", weight: 400, sample: "Body · Tamaño base del sistema" },
+        { token: "font-size-200", size: "14px", weight: 400, sample: "Body small · Helper text y labels" },
+        { token: "font-size-100", size: "12px", weight: 400, sample: "Caption · Metadatos y badges" },
+        { token: "font-size-50",  size: "10px", weight: 400, sample: "Micro · Estados y etiquetas pequeñas" },
+      ].map((t) => (
+        <div className="ds-type-row" key={t.token}>
+          <div className="ds-type-meta">
+            <span className="ds-type-token">${t.token}</span>
+            <span className="ds-type-size">{t.size} · w{t.weight}</span>
+          </div>
+          <span className="ds-type-sample" style={{ fontSize: t.size, fontWeight: t.weight }}>
+            {t.sample}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div className="ds-divider" />
+
+  {/* ── ESPACIADO ──────────────────────────────────────────────────────── */}
+  <div className="ds-section">
+    <div className="ds-section-header">
+      <div className="ds-section-label">Tokens / Spacing & Radius</div>
+      <h2 className="ds-section-title">Espaciado y bordes</h2>
+    </div>
+
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }}>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#444449', marginBottom: 16 }}>Spacing semántico</div>
+        <div className="ds-spacing-grid">
+          {[
+            { token: "spacing-xxs", px: 4  },
+            { token: "spacing-xs",  px: 8  },
+            { token: "spacing-sm",  px: 12 },
+            { token: "spacing-md",  px: 16 },
+            { token: "spacing-lg",  px: 20 },
+            { token: "spacing-xl",  px: 24 },
+            { token: "spacing-xxl", px: 28 },
+          ].map((s) => (
+            <div className="ds-spacing-row" key={s.token}>
+              <span className="ds-spacing-label">{s.token}</span>
+              <span className="ds-spacing-val">{s.px}px</span>
+              <div className="ds-spacing-bar-wrap">
+                <div className="ds-spacing-bar" style={{ width: s.px * 3 }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#444449', marginBottom: 16 }}>Border Radius</div>
+        <div className="ds-radius-grid">
+          {[
+            { token: "xxs", px: 4  },
+            { token: "xs",  px: 8  },
+            { token: "sm",  px: 12 },
+            { token: "md",  px: 16 },
+            { token: "lg",  px: 20 },
+            { token: "xl",  px: 24 },
+            { token: "xxl", px: 28 },
+          ].map((r) => (
+            <div className="ds-radius-item" key={r.token}>
+              <div className="ds-radius-box" style={{ borderRadius: r.px }} />
+              <span className="ds-radius-label">r-{r.token}</span>
+              <span className="ds-radius-val">{r.px}px</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="ds-divider" />
+
+  {/* ── FLUJO NEOBANK ──────────────────────────────────────────────────── */}
+  <div className="ds-section">
+    <div className="ds-section-header">
+      <div className="ds-section-label">Implementación</div>
+      <h2 className="ds-section-title">Flujo NeoBank</h2>
+      <p className="ds-section-desc">7 pantallas construidas sobre este design system. Mobile-first · Responsive · Con estados loading, error y success.</p>
+    </div>
+
+    <div className="ds-flow">
+
+      {/* Login */}
+      <div className="ds-flow-step">
+        <div className="ds-flow-screen">
+          <div className="ds-flow-screen-bar" />
+          <div className="ds-flow-screen-body">
+            <div style={{ fontSize: 8, fontWeight: 700, color: '#7a0cff', marginBottom: 4 }}>NeoBank</div>
+            <div className="ds-flow-screen-title">Bienvenido</div>
+            <div className="ds-flow-screen-line" style={{ width: '90%' }} />
+            <div className="ds-flow-screen-line" style={{ width: '70%' }} />
+            <div style={{ height: 8 }} />
+            <div className="ds-flow-screen-line" style={{ width: '100%', height: 8, background: '#e3e3e4' }} />
+            <div className="ds-flow-screen-line" style={{ width: '100%', height: 8, background: '#e3e3e4' }} />
+            <div className="ds-flow-screen-btn" />
+          </div>
+        </div>
+        <div className="ds-flow-label">Login</div>
+        <div className="ds-flow-sublabel">Validación inline</div>
+      </div>
+
+      <div className="ds-flow-arrow">→</div>
+
+      {/* Dashboard */}
+      <div className="ds-flow-step">
+        <div className="ds-flow-screen">
+          <div className="ds-flow-screen-bar" style={{ background: 'linear-gradient(90deg,#7a0cff,#22c55e)' }} />
+          <div className="ds-flow-screen-body">
+            <div className="ds-flow-screen-line" style={{ width: '60%', background: '#ca9eff', height: 6 }} />
+            <div style={{ height: 20, background: 'linear-gradient(135deg,#7a0cff,#0ea5e9)', borderRadius: 6, marginTop: 2 }} />
+            <div style={{ display: 'flex', gap: 4, marginTop: 2 }}>
+              {['#f2e7ff','#e7f6fd','#e9f9ef'].map(c => (
+                <div key={c} style={{ flex: 1, height: 18, background: c, borderRadius: 4 }} />
+              ))}
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, marginTop: 2 }}>
+              {[0,1,2,3].map(i => <div key={i} style={{ height: 14, background: '#f1f1f2', borderRadius: 4 }} />)}
+            </div>
+          </div>
+        </div>
+        <div className="ds-flow-label">Dashboard</div>
+        <div className="ds-flow-sublabel">Carruseles + tabs</div>
+      </div>
+
+      <div className="ds-flow-arrow">→</div>
+
+      {/* Transfer Selection */}
+      <div className="ds-flow-step">
+        <div className="ds-flow-screen">
+          <div className="ds-flow-screen-bar" />
+          <div className="ds-flow-screen-body">
+            <div className="ds-flow-screen-title">Transferir</div>
+            {[0,1,2,3].map(i => (
+              <div key={i} style={{ height: 16, background: i === 2 ? '#f2e7ff' : '#f1f1f2', borderRadius: 6, border: i === 2 ? '1.5px solid #ca9eff' : 'none' }} />
+            ))}
+          </div>
+        </div>
+        <div className="ds-flow-label">Selección</div>
+        <div className="ds-flow-sublabel">Disabled states</div>
+      </div>
+
+      <div className="ds-flow-arrow">→</div>
+
+      {/* Transfer Form */}
+      <div className="ds-flow-step">
+        <div className="ds-flow-screen">
+          <div className="ds-flow-screen-bar" />
+          <div className="ds-flow-screen-body">
+            <div style={{ display: 'flex', gap: 3, marginBottom: 6 }}>
+              {[0,1,2].map(i => (
+                <div key={i} style={{ flex: 1, height: 3, background: i === 0 ? '#7a0cff' : '#e3e3e4', borderRadius: 2 }} />
+              ))}
+            </div>
+            <div className="ds-flow-screen-line" style={{ width: '90%', background: '#e3e3e4', height: 8 }} />
+            <div style={{ height: 20, background: '#f1f1f2', borderRadius: 6, display: 'flex', alignItems: 'center', paddingLeft: 6 }}>
+              <div style={{ width: 8, height: 8, background: '#ca9eff', borderRadius: 2 }} />
+            </div>
+            <div style={{ height: 14, background: '#f2e7ff', borderRadius: 6, border: '1px solid #ca9eff' }} />
+            <div className="ds-flow-screen-btn" style={{ marginTop: 'auto' }} />
+          </div>
+        </div>
+        <div className="ds-flow-label">Formulario</div>
+        <div className="ds-flow-sublabel">Validación real-time</div>
+      </div>
+
+      <div className="ds-flow-arrow">→</div>
+
+      {/* Summary */}
+      <div className="ds-flow-step">
+        <div className="ds-flow-screen">
+          <div className="ds-flow-screen-bar" />
+          <div className="ds-flow-screen-body">
+            <div style={{ textAlign: 'center', fontSize: 8, fontWeight: 700, color: '#71717a', marginBottom: 2 }}>Vas a transferir</div>
+            <div style={{ textAlign: 'center', fontSize: 13, fontWeight: 800, color: '#2d2d31' }}>$150.000</div>
+            <div style={{ height: 36, background: '#f1f1f2', borderRadius: 6 }} />
+            <div style={{ height: 24, background: '#f1f1f2', borderRadius: 6 }} />
+            <div className="ds-flow-screen-btn" />
+          </div>
+        </div>
+        <div className="ds-flow-label">Resumen</div>
+        <div className="ds-flow-sublabel">+ Modal confirmación</div>
+      </div>
+
+      <div className="ds-flow-arrow">→</div>
+
+      {/* Success */}
+      <div className="ds-flow-step">
+        <div className="ds-flow-screen">
+          <div className="ds-flow-screen-bar" style={{ background: 'linear-gradient(90deg,#22c55e,#0ea5e9)' }} />
+          <div className="ds-flow-screen-body">
+            <div className="ds-flow-screen-check">
+              <div style={{ width: 36, height: 36, borderRadius: '50%', border: '2.5px solid #22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <div className="ds-flow-screen-line" style={{ width: '80%', margin: '0 auto', background: '#d3f3df' }} />
+            <div className="ds-flow-screen-line" style={{ width: '60%', margin: '0 auto' }} />
+            <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
+              <div style={{ flex: 1, height: 10, background: '#7a0cff', borderRadius: 4 }} />
+              <div style={{ flex: 1, height: 10, background: '#f1f1f2', borderRadius: 4 }} />
+            </div>
+          </div>
+        </div>
+        <div className="ds-flow-label">Éxito</div>
+        <div className="ds-flow-sublabel">Comprobante + CTA</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div className="ds-divider" />
+
+  {/* ── GETTING STARTED ─────────────────────────────────────────────────── */}
+  <div className="ds-section">
+    <div className="ds-section-header">
+      <div className="ds-section-label">Cómo usarlo</div>
+      <h2 className="ds-section-title">Primeros pasos</h2>
+    </div>
+
+    <div className="ds-code-block">
+      <pre>
+        <span className="ds-code-comment">{'// 1. Importa el componente en tu standalone component'}</span>{'\n'}
+        <span className="ds-code-keyword">import</span>{' { CardComponent } '}<span className="ds-code-keyword">from</span>{' '}<span className="ds-code-string">{'\'./components/card/card\''}</span>{';'}{'\n'}
+        <span className="ds-code-keyword">import</span>{' { Button } '}<span className="ds-code-keyword">from</span>{' '}<span className="ds-code-string">{'\'./components/button/button\''}</span>{';'}{'\n\n'}
+        <span className="ds-code-comment">{'// 2. Usa los tokens en tu SCSS'}</span>{'\n'}
+        <span className="ds-code-keyword">@use</span>{' '}<span className="ds-code-string">{'\'tokens/variables\''}</span>{' '}<span className="ds-code-keyword">as</span>{' tokens;'}{'\n\n'}
+        {'.my-component '}<span>{'{'}</span>{'\n'}
+        {'  color: tokens.'}<span className="ds-code-string">{'$ds-text-default-text-color-primary-default'}</span>{';'}{'\n'}
+        {'  background: tokens.'}<span className="ds-code-string">{'$ds-color-purple-purple-500'}</span>{';'}{'\n'}
+        {'  border-radius: tokens.'}<span className="ds-code-string">{'$ds-corner-corner-radius-md'}</span>{';'}{'\n'}
+        {'  padding: tokens.'}<span className="ds-code-string">{'$ds-layout-spacing-xl'}</span>{';'}{'\n'}
+        {'}'}{'\n\n'}
+        <span className="ds-code-comment">{'// 3. Regénera tokens desde Figma'}</span>{'\n'}
+        <span className="ds-code-tag">{'npm run tokens:build'}</span>
+      </pre>
+    </div>
+
+    <div style={{ marginTop: 24, padding: 20, background: '#f2e7ff', borderRadius: 12, border: '1px solid #ca9eff' }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: '#490799', marginBottom: 6 }}>📁 Estructura de tokens</div>
+      <div style={{ fontSize: 13, color: '#620acc', fontFamily: 'monospace', lineHeight: 1.8 }}>
+        tokens/tokens.json &nbsp;→&nbsp; <strong>fuente de verdad (Figma)</strong><br/>
+        tokens/config.mjs &nbsp;&nbsp;→&nbsp; Style Dictionary config<br/>
+        src/styles/tokens/_variables.scss &nbsp;→&nbsp; <strong>variables generadas</strong>
+      </div>
+    </div>
+  </div>
+
+</div>

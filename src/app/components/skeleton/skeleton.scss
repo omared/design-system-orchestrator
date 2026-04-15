@@ -1,0 +1,35 @@
+@use 'tokens/variables' as tokens;
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.ds-skeleton {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    tokens.$ds-color-neutral-neutral-100 25%,
+    tokens.$ds-color-neutral-neutral-50 50%,
+    tokens.$ds-color-neutral-neutral-100 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.5s infinite linear;
+
+  &--text {
+    border-radius: tokens.$ds-corner-corner-radius-xxs;
+    height: 14px;
+  }
+
+  &--rect {
+    border-radius: tokens.$ds-corner-corner-radius-xs;
+  }
+
+  &--circle {
+    border-radius: 50%;
+  }
+}

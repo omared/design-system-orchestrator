@@ -1,0 +1,118 @@
+<div class="transfer-success">
+
+  <!-- Stepper -->
+  <div class="stepper" aria-label="Paso 3 de 3: Completado">
+    <div class="stepper__step">
+      <span class="stepper__dot stepper__dot--done">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="stepper__label">Datos</span>
+    </div>
+    <div class="stepper__line stepper__line--done"></div>
+    <div class="stepper__step">
+      <span class="stepper__dot stepper__dot--done">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="stepper__label">Resumen</span>
+    </div>
+    <div class="stepper__line stepper__line--done"></div>
+    <div class="stepper__step">
+      <span class="stepper__dot stepper__dot--done">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8l3.5 3.5L13 5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="stepper__label">Listo</span>
+    </div>
+  </div>
+
+  @if (result) {
+    <div class="success-body">
+
+      <!-- Success icon + headline -->
+      <div class="success-hero">
+        <div class="success-icon" role="img" aria-label="Transferencia exitosa">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle cx="24" cy="24" r="22" stroke="#22c55e" stroke-width="2.5"/>
+            <path d="M14 24.5l7 7L34 17" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1 class="success-title">¡Transferencia exitosa!</h1>
+        <p class="success-subtitle">Tu dinero está en camino</p>
+        <ds-badge variant="success" size="sm">Procesado</ds-badge>
+      </div>
+
+      <!-- Amount -->
+      <div class="success-amount">
+        <span class="success-amount__label">Transferiste</span>
+        <span class="success-amount__value">{{ formatCurrency(result.amount) }}</span>
+      </div>
+
+      <!-- Receipt card -->
+      <div class="receipt" role="region" aria-label="Comprobante">
+        <h2 class="receipt__title">Comprobante</h2>
+
+        <div class="receipt__rows">
+          <div class="receipt__row">
+            <span class="receipt__key">No. de transacción</span>
+            <span class="receipt__val receipt__val--mono">{{ result.transactionId }}</span>
+          </div>
+          <div class="receipt__row">
+            <span class="receipt__key">Fecha y hora</span>
+            <span class="receipt__val">{{ formatDate(result.timestamp) }}</span>
+          </div>
+          <div class="receipt__divider"></div>
+          <div class="receipt__row">
+            <span class="receipt__key">Origen</span>
+            <div class="receipt__val">
+              <span>{{ result.originAccount.alias }}</span>
+              <span class="receipt__sub">{{ result.originAccount.accountNumber }}</span>
+            </div>
+          </div>
+          <div class="receipt__row">
+            <span class="receipt__key">Destino</span>
+            <div class="receipt__val">
+              <span>{{ result.destinationAccount.alias }}</span>
+              <span class="receipt__sub">{{ result.destinationAccount.accountNumber }}</span>
+            </div>
+          </div>
+          <div class="receipt__divider"></div>
+          <div class="receipt__row">
+            <span class="receipt__key">Valor</span>
+            <span class="receipt__val">{{ formatCurrency(result.amount) }}</span>
+          </div>
+          <div class="receipt__row">
+            <span class="receipt__key">Comisión</span>
+            <span class="receipt__val receipt__val--success">$0 · Gratis</span>
+          </div>
+          <div class="receipt__row receipt__row--total">
+            <span class="receipt__key">Total debitado</span>
+            <strong class="receipt__val">{{ formatCurrency(result.total) }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="success-actions">
+        <button class="action-btn action-btn--primary" (click)="goToDashboard()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Volver al inicio
+        </button>
+        <button class="action-btn action-btn--secondary" (click)="downloadVoucher()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21H19.44a2 2 0 001.94-1.515L22 17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Descargar comprobante
+        </button>
+      </div>
+
+    </div>
+  }
+
+</div>

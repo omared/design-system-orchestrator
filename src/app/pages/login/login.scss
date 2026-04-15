@@ -1,0 +1,243 @@
+@use 'tokens/variables' as tokens;
+
+// ─── Layout ────────────────────────────────────────────────────────────────
+
+.login-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: tokens.$ds-background-background-color-primary-default;
+
+  @media (min-width: 740px) {
+    background: linear-gradient(
+      145deg,
+      rgba(tokens.$ds-color-purple-purple-500, 0.04) 0%,
+      tokens.$ds-background-background-color-primary-default 60%
+    );
+  }
+}
+
+// ─── Header ────────────────────────────────────────────────────────────────
+
+.login-header {
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  border-bottom: 1px solid tokens.$ds-border-border-color-secondary-default;
+
+  @media (min-width: 740px) {
+    padding: tokens.$ds-layout-spacing-xl tokens.$ds-spacing-scale-28-size-140;
+    border-bottom: none;
+  }
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xs;
+  text-decoration: none;
+}
+
+.login-logo__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.login-logo__name {
+  font-size: tokens.$ds-font-size-font-size-500;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  letter-spacing: -0.5px;
+}
+
+// ─── Main ──────────────────────────────────────────────────────────────────
+
+.login-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: tokens.$ds-layout-spacing-xl tokens.$ds-layout-spacing-md;
+
+  @media (min-width: 740px) {
+    padding: tokens.$ds-spacing-scale-16-size-64 tokens.$ds-layout-spacing-xl;
+  }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xl;
+
+  @media (min-width: 740px) {
+    background: tokens.$ds-background-background-color-primary-default;
+    border-radius: tokens.$ds-corner-corner-radius-xl;
+    box-shadow: 0 tokens.$ds-spacing-scale-4-size-8 tokens.$ds-spacing-scale-4-size-32
+      rgba(tokens.$ds-color-neutral-neutral-900, 0.08);
+    padding: tokens.$ds-spacing-scale-16-size-64 tokens.$ds-spacing-scale-16-size-64;
+  }
+}
+
+// ─── Title ─────────────────────────────────────────────────────────────────
+
+.login-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xs;
+}
+
+.login-title {
+  font-size: tokens.$ds-font-size-font-size-600;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  line-height: tokens.$ds-line-height-line-height-600;
+  margin: 0;
+}
+
+.login-subtitle {
+  font-size: tokens.$ds-font-size-font-size-300;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  margin: 0;
+}
+
+// ─── Form ──────────────────────────────────────────────────────────────────
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xl;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xxs;
+}
+
+.login-field__error {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-error-default;
+  margin-top: tokens.$ds-layout-spacing-xxs;
+}
+
+// ─── CTA ───────────────────────────────────────────────────────────────────
+
+.login-cta {
+  // Sticky on mobile
+  @media (max-width: 739px) {
+    position: sticky;
+    bottom: tokens.$ds-layout-spacing-md;
+  }
+}
+
+.login-submit-btn {
+  width: 100%;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  background: tokens.$ds-color-purple-purple-500;
+  color: tokens.$ds-color-base-white;
+  font-size: tokens.$ds-font-size-font-size-300;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
+  font-family: tokens.$ds-font-inter, system-ui, sans-serif;
+  border: none;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.$ds-layout-spacing-xs;
+  min-height: 52px;
+
+  &:hover:not(:disabled) {
+    background: tokens.$ds-color-purple-purple-600;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    background: tokens.$ds-button-state-disabled-color-bg-disabled;
+    cursor: not-allowed;
+  }
+
+  &--loading {
+    background: tokens.$ds-color-purple-purple-600;
+  }
+}
+
+// ─── Spinner ───────────────────────────────────────────────────────────────
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.login-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+// ─── Footer links ──────────────────────────────────────────────────────────
+
+.login-footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: tokens.$ds-layout-spacing-xs;
+}
+
+.login-link {
+  font-size: tokens.$ds-font-size-font-size-200;
+  color: tokens.$ds-text-default-text-color-accent-default;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.login-separator {
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  font-size: tokens.$ds-font-size-font-size-100;
+}
+
+// ─── Page footer ───────────────────────────────────────────────────────────
+
+.login-page-footer {
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xs;
+  border-top: 1px solid tokens.$ds-border-border-color-secondary-default;
+
+  p {
+    font-size: tokens.$ds-font-size-font-size-100;
+    color: tokens.$ds-text-default-text-color-secundary-default;
+    margin: 0;
+  }
+}
+
+.login-page-footer__badges {
+  display: flex;
+  gap: tokens.$ds-layout-spacing-md;
+}
+
+.login-security-badge {
+  display: flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-xxs;
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}

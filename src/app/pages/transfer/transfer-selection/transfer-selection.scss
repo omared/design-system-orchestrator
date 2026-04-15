@@ -1,0 +1,163 @@
+@use 'tokens/variables' as tokens;
+
+.transfer-selection {
+  min-height: 100dvh;
+  background: tokens.$ds-color-neutral-neutral-50;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Header ────────────────────────────────────────────────────────────────
+
+.page-header {
+  background: tokens.$ds-background-background-color-primary-default;
+  padding: tokens.$ds-layout-spacing-md tokens.$ds-layout-spacing-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid tokens.$ds-border-border-color-secondary-default;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.page-header__back {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: tokens.$ds-corner-corner-radius-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  transition: background 0.15s;
+
+  svg { width: 20px; height: 20px; }
+
+  &:hover { background: tokens.$ds-color-neutral-neutral-50; }
+}
+
+.page-header__title {
+  font-size: tokens.$ds-font-size-font-size-400;
+  font-weight: tokens.$ds-font-weight-font-weight-700;
+  color: tokens.$ds-text-default-text-color-primary-default;
+  margin: 0;
+}
+
+.page-header__spacer {
+  width: 40px;
+}
+
+// ─── Body ──────────────────────────────────────────────────────────────────
+
+.transfer-selection__body {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: tokens.$ds-layout-spacing-xl tokens.$ds-layout-spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xl;
+
+  @media (min-width: 740px) {
+    padding: tokens.$ds-layout-spacing-xxl tokens.$ds-layout-spacing-xl;
+  }
+}
+
+.transfer-selection__subtitle {
+  font-size: tokens.$ds-font-size-font-size-300;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  margin: 0;
+}
+
+// ─── Options ───────────────────────────────────────────────────────────────
+
+.transfer-options {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-sm;
+}
+
+.transfer-option {
+  display: flex;
+  align-items: center;
+  gap: tokens.$ds-layout-spacing-md;
+  padding: tokens.$ds-layout-spacing-xl;
+  background: tokens.$ds-background-background-color-primary-default;
+  border-radius: tokens.$ds-corner-corner-radius-md;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.2s;
+
+  &--available {
+    border-color: tokens.$ds-border-border-color-secondary-default;
+
+    &:hover {
+      border-color: tokens.$ds-color-purple-purple-300;
+      box-shadow: 0 tokens.$ds-spacing-scale-4-size-4 tokens.$ds-spacing-scale-4-size-16
+        rgba(tokens.$ds-color-purple-purple-500, 0.1);
+    }
+
+    &:active {
+      transform: scale(0.99);
+    }
+  }
+
+  &--disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    border-color: tokens.$ds-border-border-color-secondary-default;
+  }
+}
+
+.transfer-option__icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  background: tokens.$ds-color-neutral-neutral-50;
+  border-radius: tokens.$ds-corner-corner-radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.transfer-option__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$ds-layout-spacing-xxs;
+}
+
+.transfer-option__title {
+  font-size: tokens.$ds-font-size-font-size-300;
+  font-weight: tokens.$ds-font-weight-font-weight-500;
+  color: tokens.$ds-text-default-text-color-primary-default;
+}
+
+.transfer-option__desc {
+  font-size: tokens.$ds-font-size-font-size-200;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+}
+
+.transfer-option__right {
+  flex-shrink: 0;
+}
+
+.transfer-option__tag {
+  font-size: tokens.$ds-font-size-font-size-100;
+  color: tokens.$ds-text-default-text-color-secundary-default;
+  background: tokens.$ds-color-neutral-neutral-100;
+  padding: 2px tokens.$ds-layout-spacing-xs;
+  border-radius: tokens.$ds-corner-corner-radius-xxs;
+}
+
+.transfer-option__arrow {
+  width: 20px;
+  height: 20px;
+  color: tokens.$ds-color-neutral-neutral-400;
+}

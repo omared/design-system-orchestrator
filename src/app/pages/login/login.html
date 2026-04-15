@@ -1,0 +1,109 @@
+<div class="login-page">
+  <!-- Brand header -->
+  <header class="login-header">
+    <div class="login-logo">
+      <svg class="login-logo__icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect width="40" height="40" rx="12" fill="#7a0cff"/>
+        <path d="M12 20c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="20" cy="20" r="3" fill="#fff"/>
+      </svg>
+      <span class="login-logo__name">NeoBank</span>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="login-main">
+    <div class="login-card">
+      <!-- Title -->
+      <div class="login-title-block">
+        <h1 class="login-title">Bienvenido</h1>
+        <p class="login-subtitle">Ingresa tus datos para acceder a tu cuenta</p>
+      </div>
+
+      <!-- Error alert -->
+      @if (errorMessage) {
+        <ds-alert
+          variant="error"
+          [title]="errorMessage"
+          [dismissible]="true"
+          (dismiss)="errorMessage = ''"
+        />
+      }
+
+      <!-- Form -->
+      <form class="login-form" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Document type -->
+        <div class="login-field">
+          <ds-dropdown
+            label="Tipo de documento"
+            placeholder="Selecciona un tipo"
+            [options]="documentTypeOptions"
+            [value]="documentType"
+            (valueChange)="onDocumentTypeChange($event)"
+          />
+          @if (documentTypeError) {
+            <span class="login-field__error" role="alert">Este campo es requerido</span>
+          }
+        </div>
+
+        <!-- Document number -->
+        <ds-input
+          label="Número de documento"
+          placeholder="Ej. 1023456789"
+          type="number"
+          [value]="documentNumber"
+          [hasError]="documentNumberError"
+          [errorText]="documentNumberErrorText"
+          helperText="Solo números, sin puntos ni espacios"
+          (valueChange)="onDocumentNumberChange($event)"
+        />
+
+        <!-- Submit CTA -->
+        <div class="login-cta">
+          <button
+            type="submit"
+            class="login-submit-btn"
+            [class.login-submit-btn--loading]="isLoading"
+            [disabled]="isLoading"
+            aria-live="polite"
+          >
+            @if (isLoading) {
+              <span class="login-spinner" aria-hidden="true"></span>
+              <span>Verificando...</span>
+            } @else {
+              <span>Ingresar</span>
+            }
+          </button>
+        </div>
+      </form>
+
+      <!-- Footer links -->
+      <div class="login-footer-links">
+        <a href="#" class="login-link">¿Olvidaste tu contraseña?</a>
+        <span class="login-separator">•</span>
+        <a href="#" class="login-link">Crear cuenta</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Page footer -->
+  <footer class="login-page-footer">
+    <p>© 2025 NeoBank · Todos tus datos están protegidos</p>
+    <div class="login-page-footer__badges">
+      <span class="login-security-badge">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 1L2 3.5v5c0 3 2.5 5.5 6 6.5 3.5-1 6-3.5 6-6.5v-5L8 1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M5.5 8l2 2 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Conexión segura
+      </span>
+      <span class="login-security-badge">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="3" y="7" width="10" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Datos cifrados
+      </span>
+    </div>
+  </footer>
+</div>
